@@ -143,7 +143,7 @@ var Bloc = React.createClass({
     },
 });
 
-
+/*
  ReactDOM.render(
    <Bloc />,
    document.getElementById('content3')
@@ -154,6 +154,15 @@ ReactDOM.render(
   <ListeUtilisateur />,
   document.getElementById('content5')
 );
+*/
+
+ReactDOM.render(
+  <Bloc />,
+  document.getElementById('content4')
+);
+
+
+
 
 
 

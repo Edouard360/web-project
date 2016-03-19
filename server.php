@@ -51,6 +51,8 @@ function routeRequest()
                 file_get_contents('./public/scripts/lieuxetutilisateurs.js').
                 file_get_contents('./public/scripts/listeutilisateur.js').
                 file_get_contents('./public/scripts/lieuautobar.js').
+                file_get_contents('./public/scripts/Message/Message.js').
+                file_get_contents('./public/scripts/Message/EcrireUnMessage.js').
                 file_get_contents('./public/scripts/objet.js').
                 '</script>';
                 //echo '<script type="text/babel" src="scripts/declaration.js"></script>';
@@ -217,7 +219,9 @@ function routeRequest()
                 }   
             }
             break; 
-
+        case 'EcrireUnMessage':
+            # code...
+            break;
         case '/Map':
             echo file_get_contents('./public/map.html');
             break;
@@ -233,6 +237,9 @@ function routeRequest()
             echo '<script type="text/babel">'.
             file_get_contents('./public/scripts/objetform.js').
             '</script>';
+            break;
+        case '/Mock':
+            echo file_get_contents('./public/mock.html');
             break;
         default:
             return false;

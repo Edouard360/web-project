@@ -68,7 +68,6 @@ var ListeUtilisateur = React.createClass({
 });
 
 
-
 var UtilisateurEdit= React.createClass({
   render:function(){
     var bool = this.props.user.admin>0 && !(this.props.utilisateur.admin>0);
