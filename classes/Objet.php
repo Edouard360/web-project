@@ -9,7 +9,7 @@ class Objet{
     public $lieux;
     public $photos;
     public $canDelete;
-
+//Commentaire util
 
     public static function chargerLesObjets(){
         $dbh = Database::connect();
