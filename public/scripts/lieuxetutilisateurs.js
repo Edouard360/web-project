@@ -12,7 +12,7 @@ var Utilisateur = React.createClass({
     }
     return(
       <section className="12u$(xsmall)">
-      {this.props.admin?admin:user}
+      {this.props.admin>0?admin:user}
       {this.props.nom.toUpperCase()} <br />
       {this.props.prenom.toUpperCase()} <br /> 
       </section>

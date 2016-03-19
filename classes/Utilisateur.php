@@ -111,6 +111,15 @@ class Utilisateur implements JsonSerializable{
         return $reponse;
     }
 
+    public function rendreAdmin($idu){
+        if(!$this->admin){ return "error";}
+        $dbh = Database::connect();
+        $query = "UPDATE Utilisateur SET admin=1 WHERE idu=?";
+        $sth = $dbh->prepare($query);
+        $sth->execute(array($idu));
+        $dbh = NULL;
+    }
+
     public function detruireUtilisateur($idu){
         $dbh = Database::connect();
         $query = "DELETE FROM Utilisateur WHERE idu=?";

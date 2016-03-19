@@ -29,7 +29,16 @@ var ListeUtilisateur = React.createClass({
       }); 
   },
   render:function(){
-    var utilisateurs=this.state.utilisateur.map(function(props,id){return (<div key={id}><UtilisateurEdit handleDetruire={this.handleDetruire} key={id} user={this.state.user} utilisateur={props} /><br/></div>);}.bind(this));
+    var utilisateurs=this.state.utilisateur.map(
+      function(props,id){return (
+        <div key={id}><UtilisateurEdit 
+          handleDetruire={this.handleDetruire}
+          rendreAdmin={this.rendreAdmin} 
+          key={id} user={this.state.user} 
+          utilisateur={props} />
+          <br/>
+          </div>);
+      }.bind(this));
     return(
       <div>
         {utilisateurs}
@@ -42,9 +51,16 @@ var ListeUtilisateur = React.createClass({
       type: "post",
       data: {idu:idu},
       success: function(data) {
-
-        console.log("OK DESTRUCTION");
-        console.log(data);
+        this.loadFromServer();
+      }.bind(this)
+    });
+  },
+  rendreAdmin:function(idu){
+    $.ajax({
+      url: "/RendreAdmin",
+      type: "post",
+      data: {idu:idu},
+      success: function(data) {
         this.loadFromServer();
       }.bind(this)
     });
@@ -55,16 +71,21 @@ var ListeUtilisateur = React.createClass({
 
 var UtilisateurEdit= React.createClass({
   render:function(){
-    var bool = this.props.user.admin && !this.props.utilisateur.admin;
-    var button = <button onClick={this.handleDetruire}>Supprimer</button> 
+    var bool = this.props.user.admin>0 && !(this.props.utilisateur.admin>0);
+    var button = <div>
+    <button onClick={this.handleDetruire}>Supprimer</button>
+    <button onClick={this.rendreAdmin}>rendreAdmin</button>
+    </div>
     return <div>
     <Utilisateur {...this.props.utilisateur}/>
     {bool?button:""}
     </div>
   },
   handleDetruire:function(){
-    console.log(this.props);
-    this.props.handleDetruire(this.props.idu);
+    this.props.handleDetruire(this.props.utilisateur.idu);
+  },
+  rendreAdmin:function(){
+    this.props.rendreAdmin(this.props.utilisateur.idu);
   }
 });
 

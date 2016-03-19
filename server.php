@@ -89,7 +89,7 @@ function routeRequest()
                 echo '<script type="text/babel" src="scripts/inscription.js"></script>';
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 try{
-                    $u=Utilisateur::creerUnNouvelUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], NULL,false);
+                    $u=Utilisateur::creerUnNouvelUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], 0,true);
                     if(is_array($u) && isset($u["error"])){
                         echo json_encode($u);
                     }else{
@@ -192,6 +192,17 @@ function routeRequest()
                 
             }
             break;
+        case '/RendreAdmin':
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                $u = Utilisateur::getUtilisateur($_SESSION['id']);
+                if(is_null($u)){
+                    header('Location: /Connexion');
+                }else{
+                    echo $u->rendreAdmin($_POST["idu"]);
+                }
+                
+            }
+            break;    
         case '/ChargerLesMessagesEmetteur':
             $e=1;
         case '/ChargerLesMessagesDestinataire':       
@@ -212,11 +223,10 @@ function routeRequest()
             break;
         case '/Test':
             $u = Utilisateur::getUtilisateur($_SESSION['id']);
-                if(is_null($u)){
-                    header('Location: /Connexion');
-                }else{
-                    try{$u->ajouterUnObjet("prune","bleu");}catch(PDOException $e){echo $e->getMessage();}
-                }
+                if($u->admin)
+                    echo "Hugo est admin";
+                else
+                    echo "hugo n'est pas admin";
             break;
         case '/Test2':
             echo file_get_contents('./public/index.html');
