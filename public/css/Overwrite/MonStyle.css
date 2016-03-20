@@ -50,3 +50,22 @@
 .carte{
 	position:relative; width:600px; height:400px;
 }
+
+.button.small.lieu{
+	background-color: #BB2020;
+	margin-top: 20px;
+}
+.col-sm-6.inscription{
+	padding: 10px;
+	padding-bottom: 20px;
+}
+
+.col-sm-12.inscription{
+	padding-bottom: 20px;
+
+}
+
+input[type="text"], input[type="password"], input[type="email"], select{
+	height: 3em;
+	font-size: 14px;
+}

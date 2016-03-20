@@ -69,7 +69,6 @@ var LieuMap = React.createClass({
 		          ]
 		        }
 	      	];
-	      	console.log(this.props);
 	        var map = new google.maps.Map(document.getElementById(this.props.idl), {
 	          zoom: 15,
 	          scrollwheel: false,

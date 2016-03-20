@@ -62,7 +62,7 @@ function routeRequest()
             if($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo file_get_contents('./public/index.html');
                 echo '<script type="text/babel">'.
-                file_get_contents('./public/scripts/lieuxetutilisateurs.js').
+                file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
                 file_get_contents('./public/scripts/connexion.js').
                 '</script>';
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -168,6 +168,11 @@ function routeRequest()
                 Lieu::ajouterUnLieu($_POST["tag"],$_POST["lat"],$_POST["lng"]);   
             }
             break;
+        case '/SupprimerUnLieu':
+            if($_SERVER['REQUEST_METHOD'] === 'POST') {
+                Lieu::supprimerUnLieu($_POST["idl"]); 
+            }
+            break;    
         case '/ChargerLesLieux':
             if($_SERVER['REQUEST_METHOD'] === 'GET') {
                 header('Content-Type: application/json');

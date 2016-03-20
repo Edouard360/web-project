@@ -12,30 +12,26 @@ var Inscription = React.createClass({
             <h2 >INSCRIPTION</h2>
           </header>
         </div>
-        <div className="container 50%">
+        <div className="container">
           <form onSubmit={this.inscription}>
-            <div className="row uniform">
-              <div className="6u 12u$(small)">
-                <input type="text" id="nom" placeholder="nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
+            <div>
+              <div className="col-sm-6 inscription">
+                <input className="form-control" type="text" id="nom" placeholder="nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
               </div>
-              <div className="6u$ 12u$(small)">
-                <input type="text" id="prenom" placeholder="prenom" onChange={this.handleChange} />{this.state.prenomErr}
+              <div className="col-sm-6 inscription">
+                <input className="form-control" type="text" id="prenom" placeholder="prenom" onChange={this.handleChange} />{this.state.prenomErr}
               </div>
-              <div className="12u$">
-              	<input type="text" id="identifiant" placeholder="identifiant" onChange={this.handleChange} />{this.state.identifiantErr}
+              <div className="col-sm-12 inscription">
+              	<input className="form-control" type="text" id="identifiant" placeholder="identifiant" onChange={this.handleChange} />{this.state.identifiantErr}
               </div>
-              <div className="12u$">
-              	<input type="text" id="motdepasse" placeholder="motdepasse" onChange={this.handleChange} />{this.state.motdepasseErr}
+              <div className="col-sm-12 inscription">
+              	<input className="form-control" type="text" id="motdepasse" placeholder="motdepasse" onChange={this.handleChange} />{this.state.motdepasseErr}
               </div>
-              <div className="12u$">
-                <ul className="actions">
-                  <li><input value="S'inscrire" className="special big" type="submit" /></li>
-                </ul>
+              <div className="col-sm-12 inscription">
+                <input value="S'inscrire" className="special big" type="submit" />
               </div>
-              <div className="12u$">
-				<ul className="actions">
-		          <li><input value="Connexion" className="special small" type="button" onClick={()=>window.location.replace("/Connexion")}/></li>
-		        </ul>
+              <div className="col-sm-12 inscription">
+				<input value="Connexion" className="special small" type="button" onClick={()=>window.location.replace("/Connexion")}/>
 		      </div>
             </div>
           </form>
@@ -87,5 +83,5 @@ var Inscription = React.createClass({
 
 ReactDOM.render(
   <Inscription />,
-  document.getElementById('content3')
+  document.getElementById('content2')
 );

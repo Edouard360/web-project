@@ -59,27 +59,22 @@ var Connexion = React.createClass({
 	render: function() {
 		var connexion = <input value="Se Connecter" className="special big" type="button" onClick={this.toggle}/>
 		var deconnexion = <input value="Deconnexion" className="special big" type="button" onClick={this.deconnexion}/>
-		var form1 = <div className="12u$">
+		var form1 = <div className="col-sm-12 inscription">
 		        		<input className="name" id="identifiant" placeholder="Id" type="text" />
 		    		</div>
-		var form2 = <div className="12u$">
+		var form2 = <div className="col-sm-12 inscription">
 		        		<input name="password" id="motdepasse" placeholder="Password" type="password" />
 		        		{this.state.msg}
 		   			</div>
-		var submit =<div className="12u$">
-						<ul className="actions">
-		                	<li><input value="Connexion" className="special small" type="submit"/></li>
-		            	</ul>
+		var submit =<div className="col-sm-12 inscription">
+		                <input value="Connexion" className="special small" type="submit"/>
 		            </div>
-		var lien = 	<div className="12u$">
-						<ul className="actions">
-		                	<li><input value="Inscription" className="special small" type="button" onClick={()=>window.location.replace("/Inscription")}/></li>
-		            	</ul>
-
+		var lien = 	<div className="col-sm-12 inscription">
+						<input value="Inscription" className="special small" type="button" onClick={()=>window.location.replace("/Inscription")}/>
 		            </div>		
 		var formbool = !this.state.connected && this.state.toggle;
 		var lienbool = !this.state.connected && !this.state.toggle;
-		var greet = <div className="12u$" > <h3>Connecté en tant que</h3> 
+		var greet = <div className="col-sm-12 inscription" > <h3>Connecté en tant que</h3> 
 		<Utilisateur {...this.state.utilisateur} /></div>
 		return(
 			<section id="three" className="wrapper style3 special">
@@ -90,11 +85,9 @@ var Connexion = React.createClass({
         		</div>	
 				<div className="container 25%">
 					<form onSubmit={this.connexion}>
-						<div className="row uniform">
-		              		<div className="12u$">
-		                		<ul className="actions">
-		                  			<li>{this.state.connected?deconnexion:connexion}</li>
-		                		</ul>
+						<div>
+		              		<div className="col-sm-12 inscription">
+		                  		{this.state.connected?deconnexion:connexion}
 		              		</div>
 
 		              		{(formbool)?form1:""}
