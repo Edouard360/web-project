@@ -11,7 +11,6 @@ var ListeLieu = React.createClass({
     	type: "get",
     	dataType: 'json',
     	success: function(data) {
-
       		this.setState({lieux :data});
     	}.bind(this)
   	});

@@ -5,11 +5,16 @@ class Lieu{
     public $tag;
     public $location;
 
-    public static function ajouterUnLieu($tag){
+    public static function ajouterUnLieu($tag,$lat,$lng){
         $dbh = Database::connect();
-        $query = "INSERT INTO Lieu (tag) VALUES (?)";
+        $query = ($lat==null)?"INSERT INTO Lieu (tag) VALUES (?)":"INSERT INTO Lieu (tag,lat,lng) VALUES (?,?,?)";
         $sth = $dbh->prepare($query);
-        $sth->execute(array($tag));
+        if($lat==null){
+            $sth->execute(array($tag));
+        }
+        else{
+            $sth->execute(array($tag,$lat,$lng));
+        }
         $dbh = NULL;
     }
 

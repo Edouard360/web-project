@@ -10,6 +10,7 @@ var LieuForm = React.createClass({
                 <input className="form-control" type="text" id="tag" placeholder="Tag" value={this.state.tag} onChange={this.handleChange} />{this.state.tagErr}
               </div>
               <div className="form-group">
+              	<label >Cliquez sur la carte pour placer votre lieu !</label>
              	<LieuMapForm updatePosition={this.updatePosition} />
               </div>
               <hr />
@@ -22,7 +23,6 @@ var LieuForm = React.createClass({
 	},
 	updatePosition(latLng){
 		this.setState({latitude:latLng.lat(),longitude:latLng.lng()});
-		console.log(latLng);
 	},
 	handleChange:function(event){
 		switch(event.target.id){
@@ -43,9 +43,8 @@ var LieuForm = React.createClass({
 		$.ajax({
 			url: "/AjouterUnLieu",
 			type: "post",
-			data: {tag: this.state.tag, latitude:this.state.latitude, longitude:this.state.longitude},
+			data: {tag: this.state.tag, lat:this.state.latitude, lng:this.state.longitude},
 			success: function(data) {
-				console.log(data);
 				if(data.error){
 					console.log(data.error);
 					this.setState({tagErr: data.error.tagErr});

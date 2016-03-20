@@ -165,7 +165,7 @@ function routeRequest()
             break;
         case '/AjouterUnLieu':
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                Lieu::AjouterUnLieu($_POST["tag"]);   
+                Lieu::ajouterUnLieu($_POST["tag"],$_POST["lat"],$_POST["lng"]);   
             }
             break;
         case '/ChargerLesLieux':

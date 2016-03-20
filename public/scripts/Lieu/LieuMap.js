@@ -69,7 +69,8 @@ var LieuMap = React.createClass({
 		          ]
 		        }
 	      	];
-	        var map = new google.maps.Map(document.getElementById('mappy'), {
+	      	console.log(this.props);
+	        var map = new google.maps.Map(document.getElementById(this.props.idl), {
 	          zoom: 15,
 	          scrollwheel: false,
 	          disableDoubleClickZoom:true,
@@ -83,7 +84,7 @@ var LieuMap = React.createClass({
 	        map.setCenter({lat: 48.713294, lng: 2.210644});
 
 	        var markerPrevious = new google.maps.Marker({
-	          position: {lat: this.props.lat, lng: this.props.lng},
+	          position: {lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lng)},
 	          map: map,
 	          title: 'Hello World!'
 	        });	
@@ -91,7 +92,7 @@ var LieuMap = React.createClass({
 	render:function(){
 		var divStyle = {height: 400 + 'px',borderRadius: 10 + 'px'}
 	return(
-		<div id="mappy" style={divStyle}></div>
+		<div id={this.props.idl} style={divStyle}></div>
 	  )
 	}
 });
