@@ -21,6 +21,11 @@ var Affiche = React.createClass({
             Et a été retrouvé par:
             <Utilisateur {...this.props.foundBy} />
             </div>
+    var lieux;
+    if(this.props.lieux){
+      lieux=this.props.lieux.map(function(props,id){return (<LigneLieu key={id} tag={props}/>);});
+    }
+    
     return(
       <div className="container affiche">
             L'OBJET
@@ -28,6 +33,14 @@ var Affiche = React.createClass({
 
             A été perdu par:
             <Utilisateur {...this.props.lostBy} />
+
+            {this.props.lieux?"Probablement dans ces lieux":""}
+            <table className="table">
+              <thead></thead>
+              <tbody>
+                {lieux}
+              </tbody>
+            </table>
 
             {this.props.foundBy.nom?retrouve:""}
         <div>    

@@ -17,7 +17,7 @@ var LigneLieu = React.createClass({
     var notbold = <td>{this.props.tag}</td>
     return(
     	<tr>
-    	      {this.props.bold?bold:notbold}
+    	     {this.props.bold?bold:notbold}
         </tr>
       )
   }
