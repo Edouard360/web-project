@@ -1,28 +1,28 @@
-
 var ObjetForm = React.createClass({
 	getInitialState: function() {
 		return {nomErr:'',descriptionErr:'', lieuxErr:'',nom:'',description:'', lieux:[]};
 	},
 	render:function(){
 		var form = 
-        <div className="container 50%">
+   
           <form onSubmit={this.soumettreObjet}>
-            <div className="row uniform">
-              <div className="6u 12u$(small)">
-                <input type="text" id="nom" placeholder="nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
+              <div className="form-group">
+              	<label >Nom</label>
+                <input className="form-control" type="text" id="nom" placeholder="nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
               </div>
-              <div className="6u$ 12u$(small)">
-                <input type="text" id="description" placeholder="description" value={this.state.description} onChange={this.handleChange} />{this.state.descriptionErr}
+              <div className="form-group">
+              	<label >Description</label>
+                <input className="form-control" type="text" id="description" placeholder="description" value={this.state.description} onChange={this.handleChange} />{this.state.descriptionErr}
               </div>
               <LieuAutobar data={this.props.data} lieux={this.state.lieux} add={this.add} />
-              <div className="12u$">
-                <ul className="actions">
-                  <li><input value="Enregistrer" className="special small" type="submit" /></li>
-                </ul>
+              <hr />
+              <div>
+        
+                  <input value="Enregistrer" className="special small" type="submit" />   
               </div>
-            </div>
+          
           </form>
-        </div>
+
 		return form;
 	},
 	add:function(lieu){
@@ -64,3 +64,4 @@ var ObjetForm = React.createClass({
 		});
 	},
 });
+

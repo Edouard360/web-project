@@ -2,15 +2,17 @@ var SousListeAutocomplete = React.createClass({
   render:function(){
     var lieux = this.props.isOpen && this.props.data.map(function(props,id) {
       return (
-        <div key={id}>
-        <Lieu key={id} {...props} bold = {this.props.highlightedIndex==id?true:false} > 
-        </Lieu>
-        </div>
+        <LigneLieu key={id} {...props} bold={this.props.highlightedIndex==id?true:false} /> 
         )
     }.bind(this));
     return(
       <div>
+      <table className="table">
+      <thead></thead>
+      <tbody>
       {lieux}
+      </tbody>
+      </table>
       </div>
       )
   }
@@ -117,7 +119,7 @@ var Autobar = React.createClass({
       <input 
       placeholder="Autobar" 
       value={this.state.value} 
-      className="special small" 
+      className="form-control" 
       type="text" 
       onChange={this.handleChange}
       onKeyDown={this.handleKeyDown} />
@@ -126,3 +128,4 @@ var Autobar = React.createClass({
       )
   },
 });
+

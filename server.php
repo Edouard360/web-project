@@ -46,14 +46,13 @@ function routeRequest()
             else{
                 echo file_get_contents('./public/index.html');
                 echo '<script type="text/babel">'.
-                file_get_contents('./public/scripts/autobar.js').
-                file_get_contents('./public/scripts/objetform.js').
-                file_get_contents('./public/scripts/lieuxetutilisateurs.js').
-                file_get_contents('./public/scripts/listeutilisateur.js').
-                file_get_contents('./public/scripts/lieuautobar.js').
-                file_get_contents('./public/scripts/Message/Message.js').
-                file_get_contents('./public/scripts/Message/EcrireUnMessage.js').
-                file_get_contents('./public/scripts/objet.js').
+                file_get_contents('./public/scripts/Affiche/Autobar/Autobar.js').
+                file_get_contents('./public/scripts/Affiche/Autobar/LieuAutobar.js').
+                file_get_contents('./public/scripts/Lieu/Lieu.js').
+                file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
+                file_get_contents('./public/scripts/Affiche/ObjetForm.js').
+                file_get_contents('./public/scripts/Affiche/Objet.js').
+                file_get_contents('./public/scripts/Affiche/ListeAffiche.js').
                 '</script>';
                 //echo '<script type="text/babel" src="scripts/declaration.js"></script>';
                 //echo '<script type="text/babel" src="scripts/essai.js"></script>';

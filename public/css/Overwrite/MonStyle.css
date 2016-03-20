@@ -1,0 +1,37 @@
+.table{
+	margin: 2px;
+
+}
+
+
+.table>tbody>tr{
+	border: 0px;
+
+}
+
+
+.table>tbody>tr>td{
+	border-top-width: 0px;
+
+}
+
+.affiche {
+			text-align: center;
+			margin-bottom: 50px;
+			background-color: white;
+			border-radius: 5px;
+			border: solid 2px rgba(144, 144, 144, 0.25);
+			padding-bottom: 50px;
+			padding-top: 20px;
+
+		}
+
+.container.form{
+			margin-bottom: 50px;
+			background-color: white;
+			border-radius: 5px;
+			border: solid 2px #3CADD4;
+			padding-left: 15%;
+			padding-right: 15%;
+			padding-top: 20px;
+}

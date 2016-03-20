@@ -1,53 +1,3 @@
-var Objet = React.createClass({
-  render: function(){
-    return(
-      <div className="box objet">
-      <h6>
-      NOM : {this.props.nom}<br/> 
-      DESCRIPTION : {this.props.description}</h6>
-      {this.props.lieux}
-      </div>
-      )
-  }
-});
-
-
-var Affiche = React.createClass({
-  render: function(){
-    var supprimer = <button className="button small" onClick={this.handleDelete}> <i className="fa fa-trash-o"></i>&nbsp; Supprimer</button>
-    var undeclare = <button className="button small" onClick={this.handleUndeclare}><i className="fa fa-unlock"></i>&nbsp; Retirer</button>
-    var declarer = <button className="button small" onClick={this.handleDeclare}><i className="fa fa-tag"></i>&nbsp; Déclarer</button>
-    var retrouve =<div>
-            Et a été retrouvé par:
-            <Utilisateur {...this.props.foundBy} />
-            </div>
-    return(
-      <div className="container affiche">
-            L'OBJET
-            <Objet {...this.props.objet} />  
-
-            A été perdu par:
-            <Utilisateur {...this.props.lostBy} />
-
-            {this.props.foundBy.nom?retrouve:""}
-        <div>    
-            {this.props.user.idu===this.props.lostBy.idu||this.props.user.admin ? supprimer:""}
-            {this.props.foundBy.idu===this.props.user.idu ? undeclare:""}
-            {!this.props.foundBy.idu?declarer:""}
-        </div> 
-      </div>
-      );
-  },
-  handleDelete: function(){
-    this.props.handleDelete(this.props.objet.ido);
-  },
-  handleDeclare: function(){
-    this.props.handleDeclare(this.props.objet.ido);
-  },
-  handleUndeclare: function(){
-    this.props.handleUndeclare(this.props.objet.ido);
-  },
-});
 
 
 var ListeAffiche = React.createClass({
@@ -150,35 +100,21 @@ var ListeAffiche = React.createClass({
             <h2>OBJETS PERDUS</h2>
             <p>Si vous avez perdu quelque chose, faites-le savoir !</p>
           </header>
-
-        
-    
         <div className="listeaffiches">
-          <div className="container affiche">
-            <ObjetForm data={this.state.lieux} />
-          </div>
           {objets}
         </div>
-        
-        
+        <div className="container form">
+        <h3>FORMULAIRE</h3>
+        <h5>A remplir si vous avez perdu quelque chose</h5>
+        <hr/>
+        <ObjetForm data={this.state.lieux} />
+        </div>
         <Autobar data={this.state.lieux} />
         </section>
         );
     },
 });
 
-/*
- ReactDOM.render(
-   <Bloc />,
-   document.getElementById('content3')
-   );
-
-
-ReactDOM.render(
-  <ListeUtilisateur />,
-  document.getElementById('content5')
-);
-*/
 
 ReactDOM.render(
   <ListeAffiche />,
