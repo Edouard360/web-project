@@ -1,10 +1,11 @@
 var Lieu = React.createClass({
   render:function(){
+    var map = <LieuMap lat={this.props.lat} lng={this.props.lng}/>
     return(
       <div className="container affiche">
         {this.props.tag}
-        {this.props.location}
         {this.props.idl}
+        {this.props.lat?map:""}
       </div>
 
       )

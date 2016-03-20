@@ -234,7 +234,12 @@ function routeRequest()
         case '/Test2':
             echo file_get_contents('./public/index.html');
                 echo '<script type="text/babel">'.
+                file_get_contents('./public/scripts/Filter/FilterBar.js').
+                 file_get_contents('./public/scripts/Lieu/Lieu.js').
+                 file_get_contents('./public/scripts/Lieu/LieuForm.js').
+                 file_get_contents('./public/scripts/Lieu/ListeLieu.js').
                  file_get_contents('./public/scripts/Lieu/LieuMap.js').
+
                 '</script>';
                 break;
          case '/Test3':

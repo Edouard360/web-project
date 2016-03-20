@@ -10,7 +10,7 @@ var LieuForm = React.createClass({
                 <input className="form-control" type="text" id="tag" placeholder="Tag" value={this.state.tag} onChange={this.handleChange} />{this.state.tagErr}
               </div>
               <div className="form-group">
-              
+             	<LieuMapForm updatePosition={this.updatePosition} />
               </div>
               <hr />
               <div>
@@ -19,6 +19,10 @@ var LieuForm = React.createClass({
           </form>
 
 		return form;
+	},
+	updatePosition(latLng){
+		this.setState({latitude:latLng.lat(),longitude:latLng.lng()});
+		console.log(latLng);
 	},
 	handleChange:function(event){
 		switch(event.target.id){
