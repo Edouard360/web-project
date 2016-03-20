@@ -32,7 +32,6 @@ if($scriptInvokedFromCli) {
 
 function routeRequest()
 {
-    $comments = file_get_contents('comments.json');
     //'HTTP_REFERER'
     //Changement de mot de passe stocker l'heure en SESSION er en hidden verifiez que le delta ne depasse pas une certaine limite
     //https://www.owasp.org
