@@ -35,3 +35,14 @@
 			padding-right: 15%;
 			padding-top: 20px;
 }
+
+.container.filtre{
+			margin-bottom: 20px;
+			background-color: white;
+			border-radius: 5px;
+			border: solid 1px black;
+			padding-left: 15%;
+			padding-right: 15%;
+			padding-top: 20px;
+			padding-bottom: 20px;
+}

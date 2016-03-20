@@ -101,6 +101,6 @@ var ListeLieu = React.createClass({
 //
 
 ReactDOM.render(
-  <Autobar data={[]} />,
+  <ListeLieu />,
   document.getElementById('content5')
 );

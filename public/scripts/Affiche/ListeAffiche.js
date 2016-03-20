@@ -1,8 +1,31 @@
+var FilterBar = React.createClass({
+  getInitialState: function () {
+    return {
+      value:this.props.value
+    }
+  },
+  handleChange:function (event) {
+    this.props.handleChange(event.target.value);
+  },
+  render:function(){
+    return (
+      <div>
+      <input 
+      placeholder="Filtre" 
+      value={this.props.value} 
+      className="form-control" 
+      type="text" 
+      onChange={this.handleChange}
+      />
+      </div>
+      )
+  }
+});
 
 
 var ListeAffiche = React.createClass({
   getInitialState: function() {
-    return {objets: [], lieux: [],user:{}};
+    return {objets: [], lieux: [],user:{},value:""};
   },
   componentDidMount: function() {
    this.loadFromServer();
@@ -81,9 +104,9 @@ var ListeAffiche = React.createClass({
         }.bind(this)
       });
     },
-    filtre:function(props){if(!this.state.entier) return true; else{return(props.objet.ido>parseInt(this.state.entier));}},
-    handleChange:function(e){
-      this.setState({entier:e});
+    filtre:function(props){ return(props.objet.nom.toLowerCase().indexOf(this.state.value) !== -1) },
+    handleChange:function(value){
+      this.setState({value:value});
       //console.log(this.state.entier);
     },
     render: function() {
@@ -100,6 +123,10 @@ var ListeAffiche = React.createClass({
             <h2>OBJETS PERDUS</h2>
             <p>Si vous avez perdu quelque chose, faites-le savoir !</p>
           </header>
+          <div className="container filtre">
+          Filtrer les Objets par Nom
+        <FilterBar value={this.props.value} handleChange={this.handleChange} />
+        </div>
         <div className="listeaffiches">
           {objets}
         </div>
