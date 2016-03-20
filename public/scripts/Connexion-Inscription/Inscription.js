@@ -1,5 +1,3 @@
-
-
 var Inscription = React.createClass({
 	getInitialState: function() {
 		return {nomErr:'',prenomErr:'',identifiantErr:'',motdepasseErr:'',nom:'',prenom:'',identifiant:'',motdepasse:''};

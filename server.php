@@ -63,7 +63,7 @@ function routeRequest()
                 echo file_get_contents('./public/index.html');
                 echo '<script type="text/babel">'.
                 file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
-                file_get_contents('./public/scripts/connexion.js').
+                file_get_contents('./public/scripts/Connexion-Inscription/Connexion.js').
                 '</script>';
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $u=Utilisateur::seConnecter($_POST['identifiant'],$_POST['motdepasse']);
@@ -87,7 +87,7 @@ function routeRequest()
         case '/Inscription':
             if($_SERVER['REQUEST_METHOD'] === 'GET'){
                 echo file_get_contents('./public/index.html');
-                echo '<script type="text/babel" src="scripts/inscription.js"></script>';
+                echo '<script type="text/babel" src="scripts/Connexion-Inscription/Inscription.js"></script>';
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 try{
                     $u=Utilisateur::creerUnNouvelUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], 0,true);
