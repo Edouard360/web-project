@@ -263,7 +263,7 @@ function routeRequest()
                 '</script>';
                 break;                 
         case '/Mock':
-            echo file_get_contents('./public/mock.html');
+            echo file_get_contents('./public/mapHugo.html');
             break;
         default:
             return false;
