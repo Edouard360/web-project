@@ -49,7 +49,6 @@ var ListeLieu = React.createClass({
 		        </div>
 	        </section>
 		)
-
 	}
 });
 

@@ -1,6 +1,6 @@
 var LieuForm = React.createClass({
 	getInitialState: function() {
-		return {tagErr:'',tag:''};
+		return {tagErr:'',tag:'', latitude:"",longitude:""};
 	},
 	render:function(){
 		var form = 
@@ -8,6 +8,9 @@ var LieuForm = React.createClass({
               <div className="form-group">
               	<label >Tag</label>
                 <input className="form-control" type="text" id="tag" placeholder="Tag" value={this.state.tag} onChange={this.handleChange} />{this.state.tagErr}
+              </div>
+              <div className="form-group">
+              
               </div>
               <hr />
               <div>
@@ -22,8 +25,13 @@ var LieuForm = React.createClass({
 			case "tag":
 				this.setState({tag : event.target.value,tagErr:''});
 				break;
+			case "map":
+				this.setState({latitude: event.target.latitude,longitude: event.target.longitude});
+				break;
 			default:
+
 		}
+
 	},
 	soumettreLieu:function(e){
 		e.preventDefault();
@@ -31,7 +39,7 @@ var LieuForm = React.createClass({
 		$.ajax({
 			url: "/AjouterUnLieu",
 			type: "post",
-			data: {tag: this.state.tag},
+			data: {tag: this.state.tag, latitude:this.state.latitude, longitude:this.state.longitude},
 			success: function(data) {
 				console.log(data);
 				if(data.error){
