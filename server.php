@@ -244,7 +244,6 @@ function routeRequest()
                  file_get_contents('./public/scripts/Lieu/LieuForm.js').
                  file_get_contents('./public/scripts/Lieu/ListeLieu.js').
                  file_get_contents('./public/scripts/Lieu/LieuMap.js').
-
                 '</script>';
                 break;
          case '/Test3':
@@ -255,7 +254,14 @@ function routeRequest()
                  file_get_contents('./public/scripts/Lieu/LieuForm.js').
                  file_get_contents('./public/scripts/Lieu/ListeLieu.js').
                 '</script>';
-                break;        
+                break;
+        case '/Test4':
+            echo file_get_contents('./public/index.html');
+                echo '<script type="text/babel">'.
+                file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
+                 file_get_contents('./public/scripts/Utilisateur/ListeUtilisateur.js').
+                '</script>';
+                break;                 
         case '/Mock':
             echo file_get_contents('./public/mock.html');
             break;

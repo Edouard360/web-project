@@ -40,9 +40,15 @@ var ListeUtilisateur = React.createClass({
           </div>);
       }.bind(this));
     return(
-      <div>
+      <section id="one" className="wrapper style1 special">
+          <header className="major">
+            <h2>UTILISATEURS</h2>
+            <p>Vous êtes admin ! <br/> Vous pouvez conférer votre statut ou désinscrire les autres utilisateurs...</p>
+          </header>
+          <div className="listeaffiches">
         {utilisateurs}
-      </div>
+        </div>
+      </section>
       )
   },
   handleDetruire: function(idu){
@@ -72,13 +78,16 @@ var UtilisateurEdit= React.createClass({
   render:function(){
     var bool = this.props.user.admin>0 && !(this.props.utilisateur.admin>0);
     var button = <div>
-    <button onClick={this.handleDetruire}>Supprimer</button>
-    <button onClick={this.rendreAdmin}>rendreAdmin</button>
+    <button className="button small" onClick={this.handleDetruire}><i className="fa fa-exclamation"></i>&nbsp; Désinscrire</button>
+    <button className="button small" onClick={this.rendreAdmin}><i className="fa fa-star"></i>&nbsp; Rendre Admin</button>
     </div>
-    return <div>
-    <Utilisateur {...this.props.utilisateur}/>
-    {bool?button:""}
-    </div>
+    return(
+      <div className="container affiche">
+        <Utilisateur {...this.props.utilisateur}/>
+        {bool?button:""}
+      </div>
+      )
+    
   },
   handleDetruire:function(){
     this.props.handleDetruire(this.props.utilisateur.idu);
@@ -88,3 +97,7 @@ var UtilisateurEdit= React.createClass({
   }
 });
 
+ReactDOM.render(
+  <ListeUtilisateur />,
+  document.getElementById('content2')
+);
