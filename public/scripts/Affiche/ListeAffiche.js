@@ -1,28 +1,3 @@
-var FilterBar = React.createClass({
-  getInitialState: function () {
-    return {
-      value:this.props.value
-    }
-  },
-  handleChange:function (event) {
-    this.props.handleChange(event.target.value);
-  },
-  render:function(){
-    return (
-      <div>
-      <input 
-      placeholder="Filtre" 
-      value={this.props.value} 
-      className="form-control" 
-      type="text" 
-      onChange={this.handleChange}
-      />
-      </div>
-      )
-  }
-});
-
-
 var ListeAffiche = React.createClass({
   getInitialState: function() {
     return {objets: [], lieux: [],user:{},value:""};
@@ -125,7 +100,7 @@ var ListeAffiche = React.createClass({
           </header>
           <div className="container filtre">
           Filtrer les Objets par Nom
-        <FilterBar value={this.props.value} handleChange={this.handleChange} />
+        <FilterBar value={this.state.value} handleChange={this.handleChange} />
         </div>
         <div className="listeaffiches">
           {objets}
@@ -136,7 +111,6 @@ var ListeAffiche = React.createClass({
         <hr/>
         <ObjetForm data={this.state.lieux} />
         </div>
-        <Autobar data={this.state.lieux} />
         </section>
         );
     },

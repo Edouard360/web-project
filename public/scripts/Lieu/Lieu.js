@@ -1,7 +1,7 @@
 var Lieu = React.createClass({
   render:function(){
     return(
-      <div>
+      <div className="container affiche">
         {this.props.tag}
         {this.props.location}
         {this.props.idl}

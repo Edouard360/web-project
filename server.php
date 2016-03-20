@@ -51,6 +51,7 @@ function routeRequest()
                 file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
                 file_get_contents('./public/scripts/Affiche/ObjetForm.js').
                 file_get_contents('./public/scripts/Affiche/Objet.js').
+                file_get_contents('./public/scripts/Filter/FilterBar.js').
                 file_get_contents('./public/scripts/Affiche/ListeAffiche.js').
                 '</script>';
                 //echo '<script type="text/babel" src="scripts/declaration.js"></script>';
@@ -232,10 +233,13 @@ function routeRequest()
             break;
         case '/Test2':
             echo file_get_contents('./public/index.html');
-            echo '<script type="text/babel">'.
-            file_get_contents('./public/scripts/objetform.js').
-            '</script>';
-            break;
+                echo '<script type="text/babel">'.
+                file_get_contents('./public/scripts/Lieu/Lieu.js').
+                file_get_contents('./public/scripts/Filter/FilterBar.js').
+                file_get_contents('./public/scripts/Lieu/LieuForm.js').
+                file_get_contents('./public/scripts/Lieu/ListeLieu.js').
+                '</script>';
+                break;
         case '/Mock':
             echo file_get_contents('./public/mock.html');
             break;
