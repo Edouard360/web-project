@@ -74,7 +74,7 @@ var App2 = React.createClass({
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li role="presentation" onClick={this.avoidReload} className={this.state.Docs} ><a href="#" id="Docs"><i className="fa fa-book" id="Docs"></i>&nbsp; </a></li>
-              <li role="presentation" onClick={this.avoidReload} className={this.state.Connexion} ><a href="#" id="Connexion"><i className="fa fa-refresh" id="Connexion"></i>&nbsp;</a></li>
+              <li role="presentation" onClick={this.avoidReload} className={this.state.Connexion} ><a href="#" id="Home"  >{this.state.user.nom} </a></li>
             </ul>
           </div>
         </nav>

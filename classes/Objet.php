@@ -10,8 +10,7 @@ class Objet{
     public $photos;
     public $canDelete;
 
-    public static function chargerLesObjets(){
-        $dbh = Database::connect();
+    public static function chargerLesObjets($dbh){
         $query = "SELECT o.ido AS ido,o.nom AS nom, o.description AS description, u1.idu AS lostByidu,u1.nom AS lostBynom, u1.prenom AS lostByprenom, u1.identifiant AS lostByidentifiant, u1.admin AS lostByadmin, u2.idu AS foundByidu,u2.nom AS foundBynom, u2.prenom AS foundByprenom, u2.identifiant AS foundByidentifiant, u2.admin AS foundByadmin, GROUP_CONCAT(l.tag) AS lieux 
         	FROM Objet o 
 	        INNER JOIN Utilisateur u1 ON o.lostBy=u1.idu
@@ -23,7 +22,6 @@ class Objet{
         $sth->execute();
         $reponse = $sth->fetchAll(PDO::FETCH_OBJ);
         // Il faudra juste faire un implode pour les lieux !
-        $dbh = NULL;
         return $reponse;
     }
 

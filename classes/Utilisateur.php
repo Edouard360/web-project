@@ -16,8 +16,7 @@ class Utilisateur implements JsonSerializable{
         return ['idu'=> $this->idu,'nom' => $this->nom,'prenom' => $this->prenom,'identifiant' => $this->identifiant,'admin' => $this->admin];
     }
 
-    public static function getUtilisateur($idu){
-        $dbh = Database::connect();
+    public static function getUtilisateur($dbh,$idu){
         $query = "SELECT * FROM Utilisateur WHERE idu=?";
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS,'Utilisateur');
@@ -27,12 +26,10 @@ class Utilisateur implements JsonSerializable{
             
         }
         $reponse = $sth->fetch();
-        $dbh = NULL;
         return $reponse;
     }
 
-    public static function seConnecter($identifiant, $mdp){
-        $dbh = Database::connect();
+    public static function seConnecter($dbh,$identifiant, $mdp){
         $query = "SELECT * FROM Utilisateur WHERE identifiant=? AND mdp=?";
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS,'Utilisateur');
@@ -44,26 +41,22 @@ class Utilisateur implements JsonSerializable{
         else{
             $reponse = "Identifiant ou mot de passe incorrect !";
         }
-        $dbh = NULL;
         return $reponse;
     }
 
-    public static function creerUnNouvelUtilisateur($nom,$prenom,$identifiant,$mdp,$admin,$boolean){
+    public static function creerUnNouvelUtilisateur($dbh,$nom,$prenom,$identifiant,$mdp,$admin,$boolean){
         if(is_array($u=self::verifierLesParametres($nom,$prenom,$identifiant,$mdp))){
             return(array("error"=>$u));
         } 
-        $dbh = Database::connect();
         $query = "INSERT INTO Utilisateur (nom,prenom,identifiant,mdp,admin) VALUES (?,?,?,?,?)";
         $sth = $dbh->prepare($query);
         try{
             $sth->execute(array($nom,$prenom,$identifiant,sha1($mdp."seldeprotection"),$admin));
         }catch(PDOException $e){
-            $dbh=NULL;
             throw $e;
         }
-        $dbh=NULL;
         if($boolean)
-            return self::seConnecter($identifiant,sha1($mdp."seldeprotection"));
+            return self::seConnecter($dbh,$identifiant,sha1($mdp."seldeprotection"));
     }
 
     public static function verifierLesParametres($nom,$prenom,$identifiant,$mdp){
@@ -96,48 +89,38 @@ class Utilisateur implements JsonSerializable{
         $_SESSION['id'] = NULL;
     }
 
-    public static function chargerLesUtilisateurs(){
-        $dbh = Database::connect();
+    public static function chargerLesUtilisateurs($dbh){
         $query = "SELECT idu,nom,prenom,identifiant,admin FROM Utilisateur";
         $sth = $dbh->prepare($query);
         $sth->execute();
         $reponse = $sth->fetchAll(PDO::FETCH_OBJ);
-        $dbh = NULL;
         return $reponse;
     }
 
-    public function rendreAdmin($idu){
+    public function rendreAdmin($dbh,$idu){
         if(!$this->admin){ return "error";}
-        $dbh = Database::connect();
         $query = "UPDATE Utilisateur SET admin=1 WHERE idu=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($idu));
-        $dbh = NULL;
     }
 
-    public function detruireUtilisateur($idu){
-        $dbh = Database::connect();
+    public function detruireUtilisateur($dbh,$idu){
         $query = "DELETE FROM Utilisateur WHERE idu=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($idu));
-        $dbh = NULL;
     }
 
-    public function supprimerUnObjet($ido){
-        $dbh = Database::connect();
+    public function supprimerUnObjet($dbh,$ido){
         $query = "DELETE FROM Objet WHERE ido=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($ido));
-        $dbh = NULL;
     }
 
-    public function ajouterUnObjet($nom,$description,$lieux){
-        $dbh = Database::connect();
+    public function ajouterUnObjet($dbh,$nom,$description,$lieux){
         $query = "INSERT INTO Objet (lostBy,nom,description) VALUES (?,?,?)";
         $sth = $dbh->prepare($query);
         $sth->execute(array($this->idu,$nom,$description));
         if($lieux==null){
-            $dbh = NULL;
             return;
         }
         $ido = $dbh->lastInsertId();
@@ -146,22 +129,17 @@ class Utilisateur implements JsonSerializable{
         foreach($lieux as $idl){
             echo "RESULTAT".$sth->execute(array($ido,$idl));
         }
-        $dbh = NULL;
     }
 
-    public function declarerAvoirTrouveUnObjet($ido){
-        $dbh = Database::connect();
+    public function declarerAvoirTrouveUnObjet($dbh,$ido){
         $query = "UPDATE Objet SET foundBy=? WHERE ido=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($this->idu,$ido));
-        $dbh = NULL;
     }
-    public function retirerDeclaration($ido){
-        $dbh = Database::connect();
+    public function retirerDeclaration($dbh,$ido){
         $query = "UPDATE Objet SET foundBy=NULL WHERE ido=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($ido));
-        $dbh = NULL;
     }
 }
 ?>
