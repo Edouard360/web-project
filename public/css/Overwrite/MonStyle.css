@@ -77,3 +77,12 @@
 	min-height:1200px;
 }
 
+
+form.navbar-form.navbar-left.navbar-fixed-top.special-fix {
+    position: fixed;
+    top: 80px;
+    left: 30px;
+    width: 200px;
+}
+
+form.navbar-form.navbar-left.navbar-fixed-top.special-fix > ul {}

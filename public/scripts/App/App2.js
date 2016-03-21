@@ -45,7 +45,7 @@ var App2 = React.createClass({
         break;  
     case "Users":
         this.setState({Home:"",Lieux:"",Connexion:"",Docs:"",Users:"active"});
-        ReactDOM.render( <Connexion user={this.state.user} connect={this.connect} />, document.getElementById('content2') );
+        ReactDOM.render( <ListeUtilisateur user={this.state.user} connect={this.connect} />, document.getElementById('content2') );
         break;        
     default:
     }    
