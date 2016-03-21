@@ -52,17 +52,17 @@ var Connexion = React.createClass({
 		var connexion = <input value="Se Connecter" className="special big" type="button" onClick={this.toggle}/>
 		var deconnexion = <input value="Deconnexion" className="special big" type="button" onClick={this.deconnexion}/>
 		var form1 = <div className="col-sm-12 inscription">
-		        		<input className="name" id="identifiant" placeholder="Id" type="text" />
+		        		<input className="name" id="identifiant" placeholder="Id" type="text" className="form-control"  />
 		    		</div>
 		var form2 = <div className="col-sm-12 inscription">
-		        		<input name="password" id="motdepasse" placeholder="Password" type="password" />
+		        		<input name="password" id="motdepasse" placeholder="Password" type="password" className="form-control" />
 		        		{this.state.msg}
 		   			</div>
 		var submit =<div className="col-sm-12 inscription">
 		                <input value="Connexion" className="special small" type="submit"/>
 		            </div>
 		var lien = 	<div className="col-sm-12 inscription">
-						<input value="Inscription" className="special small" type="button" onClick={()=>window.location.replace("/Inscription")}/>
+						<input value="Inscription" className="special small" type="button" onClick={()=>ReactDOM.render(<Inscription />, document.getElementById('content2') )}/>
 		            </div>		
 		var formbool = !this.state.connected && this.state.toggle;
 		var lienbool = !this.state.connected && !this.state.toggle;

@@ -18,9 +18,9 @@
 .affiche {
 			text-align: center;
 			margin-bottom: 50px;
-			background-color: #8DD6AE;
+			background-color: #FFFFFF;
 			border-radius: 5px;
-			border: solid 2px rgba(144, 144, 144, 0.25);
+			border: solid 2px rgb(4, 0, 255);
 			padding-bottom: 50px;
 			padding-top: 20px;
 		}
@@ -56,18 +56,15 @@
 }
 .col-sm-6.inscription{
 	padding: 10px;
-	padding-bottom: 20px;
+	padding-bottom: 30px;
 }
 
 .col-sm-12.inscription{
-	padding-bottom: 20px;
-
+	padding-bottom: 30px;
+	border-width: 3px;
 }
 
-input[type="text"], input[type="password"], input[type="email"], select{
-	height: 3em;
-	font-size: 14px;
-}
+
 
 .container.affiche {
 }
@@ -75,3 +72,8 @@ input[type="text"], input[type="password"], input[type="email"], select{
 .container.affiche {
     width: 30%;
 }
+
+.style22{
+	min-height:1200px;
+}
+

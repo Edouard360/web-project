@@ -3,12 +3,6 @@
 @import url(font-awesome.min.css);
 @import url(font-google.css);
 
-/*
-	Transit by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
-
 /* Basic */
 
 	body {
@@ -427,9 +421,8 @@
 		.box.utilisateur,.box.objet {
 			padding: 5px;
 			margin-bottom: 1em;
-			margin-left: 35%;
-			margin-right: 35%;
-			/* margin-right: 100px; */
+			margin-left: 100px;
+			margin-right: 100px;
 		} 
 /*
 		.box.listeaffiches {
@@ -1118,12 +1111,12 @@
 		}
 
 			.wrapper.style1 .box {
-				background-color: #75F732;
+				background-color: #F5F5F5;
 				padding: 0em 0em;
 			}
 
 				.wrapper.style1 .box h2, .wrapper.style1 .box h3, .wrapper.style1 .box h4, .wrapper.style1 .box h5, .wrapper.style1 .box h6 {
-					color: #C81B1B;
+					color: #858585;
 				}
 
 		.wrapper.style2 .profiles {

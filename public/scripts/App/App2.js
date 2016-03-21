@@ -45,7 +45,7 @@ var App2 = React.createClass({
         break;  
     case "Users":
         this.setState({Home:"",Lieux:"",Connexion:"",Docs:"",Users:"active"});
-        ReactDOM.render( <ListeUtilisateur user={this.state.user} />, document.getElementById('content2') );
+        ReactDOM.render( <Connexion user={this.state.user} connect={this.connect} />, document.getElementById('content2') );
         break;        
     default:
     }    
@@ -56,8 +56,14 @@ var App2 = React.createClass({
     //Problème, on change d'état puis on affiche ?
   },
   avoidReload:function(event){
-    console.log(event.target.id);
-    this.switch(event.target.id);
+    console.log(event.target);
+    if(!event.target.id)
+      this.switch(event.target.parentElement.id);
+    else{
+      this.switch(event.target.id);
+    }
+    
+    
   },
   render:function(){
     return(
@@ -73,8 +79,8 @@ var App2 = React.createClass({
               <li role="presentation" onClick={this.avoidReload} className={this.state.Users}><a href="#" id="Users" ><i className="fa fa-users" id="Users"></i>&nbsp;</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li role="presentation" onClick={this.avoidReload} className={this.state.Docs} ><a href="#" id="Docs"><i className="fa fa-book" id="Docs"></i>&nbsp; </a></li>
-              <li role="presentation" onClick={this.avoidReload} className={this.state.Connexion} ><a href="#" id="Home"  >{this.state.user.nom} </a></li>
+              <li role="presentation" onClick={this.avoidReload} className={this.state.Docs} id="Docs" ><a href="#" id="Docs"><i className="fa fa-book" id="Docs"></i>&nbsp; </a></li>
+              <li role="presentation" onClick={this.avoidReload} className={this.state.Connexion} id="Connexion" ><a href="#" id="Connexion"  >{this.state.user.nom?this.state.user.nom:"Connexion"} </a></li>
             </ul>
           </div>
         </nav>

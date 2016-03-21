@@ -69,6 +69,7 @@ function routeRequest()
             echo file_get_contents('./public/index.html');
             echo '<script type="text/babel">'.
             file_get_contents('./public/scripts/Connexion-Inscription/Connexion.js').
+            file_get_contents('./public/scripts/Connexion-Inscription/Inscription.js').
             file_get_contents('./public/scripts/Affiche/Autobar/Autobar.js').
             file_get_contents('./public/scripts/Affiche/Autobar/LieuAutobar.js').
             file_get_contents('./public/scripts/Lieu/Lieu.js').

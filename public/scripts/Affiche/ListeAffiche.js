@@ -88,6 +88,15 @@ var ListeAffiche = React.createClass({
             <h2>OBJETS PERDUS</h2>
             <p>Si vous avez perdu quelque chose, faites-le savoir !</p>
           </header>
+          <div className="container form">
+        <h3>FORMULAIRE</h3>
+        <h5>A remplir si vous avez perdu quelque chose</h5>
+        <hr/>
+        <ObjetForm data={this.state.lieux} />
+        </div>
+        <header className="major">
+        <p>Vous pouvez consulter la liste d'Objets</p>
+        </header>
           <div className="container filtre">
           Filtrer les Objets par Nom
         <FilterBar value={this.state.value} handleChange={this.handleChange} />
@@ -95,12 +104,7 @@ var ListeAffiche = React.createClass({
         <div className="listeaffiches">
           {objets}
         </div>
-        <div className="container form">
-        <h3>FORMULAIRE</h3>
-        <h5>A remplir si vous avez perdu quelque chose</h5>
-        <hr/>
-        <ObjetForm data={this.state.lieux} />
-        </div>
+        
         </section>
         );
     },

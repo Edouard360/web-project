@@ -29,7 +29,7 @@ var Inscription = React.createClass({
                 <input value="S'inscrire" className="special big" type="submit" />
               </div>
               <div className="col-sm-12 inscription">
-				<input value="Connexion" className="special small" type="button" onClick={()=>window.location.replace("/Connexion")}/>
+				<input value="Connexion" className="special small" type="button" onClick={()=>ReactDOM.render(<Connexion user={{}} />, document.getElementById('content2') )}/>
 		      </div>
             </div>
           </form>
@@ -79,7 +79,10 @@ var Inscription = React.createClass({
 	},
 });
 
+/*
+
 ReactDOM.render(
   <Inscription />,
   document.getElementById('content2')
 );
+*/
