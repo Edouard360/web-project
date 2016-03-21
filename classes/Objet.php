@@ -33,30 +33,4 @@ class Objet{
     }
 }
 
-/*
-    $serialize=function($objet){
-            echo is_null($objet) ;
-            $foundBy=new Utilisateur;
-            $foundBy->nom=$objet->foundBynom;
-            $foundBy->prenom=$objet->foundByprenom;
-            $foundBy->identifiant=$objet->foundByidentifiant;
-            $foundBy->admin=$objet->foundByadmin;
-
-  
-            $lostBy=new Utilisateur;
-            $lostBy->nom=$objet->lostBynom;
-            $lostBy->prenom=$objet->lostByprenom;
-            $lostBy->identifiant=$objet->lostByidentifiant;
-            $lostBy->admin=$objet->lostByadmin;
-
-            
-            $objet=new Objet;
-            $objet->ido=$objet->ido;
-            $objet->nom=$objet->nom;
-            $objet->description=$objet->description;
-            $objet->belongingTo=$lostBy;
-            $objet->foundBy=$foundBy;
-            return json_encode($objet);
-        };
-*/
-        ?>
+?>

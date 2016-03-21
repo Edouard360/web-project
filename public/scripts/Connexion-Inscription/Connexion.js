@@ -39,6 +39,7 @@ var Connexion = React.createClass({
 			success: function() {
 				console.log("Deconnexion effective");
       			this.setState({connected:false});
+      			this.props.connect({});
     		}.bind(this),
     		error: function(xhr, status, err) {
       			console.log(xhr);

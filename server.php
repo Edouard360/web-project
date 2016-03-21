@@ -6,6 +6,7 @@ require("./classes/Utilisateur.php");
 require("./classes/Lieu.php");
 require("./classes/Message.php");
 
+
 //ini_set('session.use', newvalue)
 //Initialisation de la session a faire
 //echo (htmlspecialchars(...) sinon faille de securite )
@@ -43,30 +44,25 @@ function routeRequest()
         case '/':
         case '/Home':
         case '/Lieux':
-            if(is_null($_SESSION["id"])){
-                header('Location: /Connexion');
-            }
-            else{
-                echo file_get_contents('./public/index.html');
-                echo '<script type="text/babel">'.
-                file_get_contents('./public/scripts/Connexion-Inscription/Connexion.js').
-                file_get_contents('./public/scripts/Affiche/Autobar/Autobar.js').
-                file_get_contents('./public/scripts/Affiche/Autobar/LieuAutobar.js').
-                file_get_contents('./public/scripts/Lieu/Lieu.js').
-                file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
-                file_get_contents('./public/scripts/Affiche/ObjetForm.js').
-                file_get_contents('./public/scripts/Affiche/Objet.js').
-                file_get_contents('./public/scripts/Filter/FilterBar.js').
-                file_get_contents('./public/scripts/Affiche/ListeAffiche.js').
-                file_get_contents('./public/scripts/Lieu/Lieu.js').
-                file_get_contents('./public/scripts/Lieu/LieuForm.js').
-                file_get_contents('./public/scripts/Lieu/ListeLieu.js').
-                file_get_contents('./public/scripts/Lieu/LieuMap.js').
-                file_get_contents('./public/scripts/App/App2.js').
-                '</script>';
-                break;  
-            }
-            break;
+            echo file_get_contents('./public/index.html');
+            echo '<script type="text/babel">'.
+            file_get_contents('./public/scripts/Connexion-Inscription/Connexion.js').
+            file_get_contents('./public/scripts/Affiche/Autobar/Autobar.js').
+            file_get_contents('./public/scripts/Affiche/Autobar/LieuAutobar.js').
+            file_get_contents('./public/scripts/Lieu/Lieu.js').
+            file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
+            file_get_contents('./public/scripts/Utilisateur/ListeUtilisateur.js').
+            file_get_contents('./public/scripts/Affiche/ObjetForm.js').
+            file_get_contents('./public/scripts/Affiche/Objet.js').
+            file_get_contents('./public/scripts/Filter/FilterBar.js').
+            file_get_contents('./public/scripts/Affiche/ListeAffiche.js').
+            file_get_contents('./public/scripts/Lieu/Lieu.js').
+            file_get_contents('./public/scripts/Lieu/LieuForm.js').
+            file_get_contents('./public/scripts/Lieu/ListeLieu.js').
+            file_get_contents('./public/scripts/Lieu/LieuMap.js').
+            file_get_contents('./public/scripts/App/App2.js').
+            '</script>';
+            break;  
         case '/Connexion':
             if($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo file_get_contents('./public/index.html');
@@ -239,45 +235,13 @@ function routeRequest()
         case 'EcrireUnMessage':
             # code...
             break;
-        case '/Map':
-            echo file_get_contents('./public/mapHugo.html');
-            break;
-        case '/Test':
-            $u = Utilisateur::getUtilisateur($_SESSION['id']);
-                if($u->admin)
-                    echo "Hugo est admin";
-                else
-                    echo "hugo n'est pas admin";
+        case '/Test1':
             break;
         case '/Test2':
-            echo file_get_contents('./public/index.html');
-                echo '<script type="text/babel">'.
-                file_get_contents('./public/scripts/Filter/FilterBar.js').
-                 file_get_contents('./public/scripts/Lieu/Lieu.js').
-                 file_get_contents('./public/scripts/Lieu/LieuForm.js').
-                 file_get_contents('./public/scripts/Lieu/ListeLieu.js').
-                 file_get_contents('./public/scripts/Lieu/LieuMap.js').
-                '</script>';
-                break;
-         case '/Test3':
-            echo file_get_contents('./public/index.html');
-                echo '<script type="text/babel">'.
-                file_get_contents('./public/scripts/Filter/FilterBar.js').
-                 file_get_contents('./public/scripts/Lieu/Lieu.js').
-                 file_get_contents('./public/scripts/Lieu/LieuForm.js').
-                 file_get_contents('./public/scripts/Lieu/ListeLieu.js').
-                '</script>';
-                break;
-        case '/Test4':
-            echo file_get_contents('./public/index.html');
-                echo '<script type="text/babel">'.
-                file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
-                 file_get_contents('./public/scripts/Utilisateur/ListeUtilisateur.js').
-                '</script>';
-                break;                        
-        case '/Mock':
-            echo file_get_contents('./public/mapHugo.html');
             break;
+         case '/Test3':
+            break;
+
         default:
             return false;
     }

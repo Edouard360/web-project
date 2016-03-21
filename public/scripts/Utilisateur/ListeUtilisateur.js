@@ -1,7 +1,7 @@
 
 var ListeUtilisateur = React.createClass({
   getInitialState: function() {
-    return {utilisateur:[],user:{}}
+    return {utilisateur:[]}
   },
   componentDidMount: function() {
    this.loadFromServer();
@@ -16,17 +16,6 @@ var ListeUtilisateur = React.createClass({
         this.setState({utilisateur :data});
       }.bind(this)
     });
-     $.ajax({
-      url: "/Connexion",
-      type: "put",
-      dataType: "json",
-      success: function(data) {
-        if(data.result){
-          this.setState({user:data.result});
-          console.log(data.result);
-        }
-        }.bind(this),
-      }); 
   },
   render:function(){
     var utilisateurs=this.state.utilisateur.map(
@@ -34,7 +23,7 @@ var ListeUtilisateur = React.createClass({
         <div key={id}><UtilisateurEdit 
           handleDetruire={this.handleDetruire}
           rendreAdmin={this.rendreAdmin} 
-          key={id} user={this.state.user} 
+          key={id} user={this.props.user} 
           utilisateur={props} />
           <br/>
           </div>);
@@ -96,8 +85,9 @@ var UtilisateurEdit= React.createClass({
     this.props.rendreAdmin(this.props.utilisateur.idu);
   }
 });
-
+/*
 ReactDOM.render(
   <ListeUtilisateur />,
   document.getElementById('content2')
 );
+*/

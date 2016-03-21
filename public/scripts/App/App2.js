@@ -45,14 +45,14 @@ var App2 = React.createClass({
         break;  
     case "Users":
         this.setState({Home:"",Lieux:"",Connexion:"",Docs:"",Users:"active"});
-        
+        ReactDOM.render( <ListeUtilisateur user={this.state.user} />, document.getElementById('content2') );
         break;        
     default:
     }    
   },
   connect:function(user){
     this.setState({user:user});
-    this.switch("Home");
+    ReactDOM.render( <Connexion user={user} connect={this.connect} />, document.getElementById('content2') );
     //Problème, on change d'état puis on affiche ?
   },
   avoidReload:function(event){
@@ -82,6 +82,8 @@ var App2 = React.createClass({
       )
   },
 });
+
+
 
 $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyCL0D13h3FIvrnrRFRvuC4rj_GY8eOl9eQ").done(creater);
 function creater(){

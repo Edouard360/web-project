@@ -23,7 +23,7 @@ var Inscription = React.createClass({
               	<input className="form-control" type="text" id="identifiant" placeholder="identifiant" onChange={this.handleChange} />{this.state.identifiantErr}
               </div>
               <div className="col-sm-12 inscription">
-              	<input className="form-control" type="text" id="motdepasse" placeholder="motdepasse" onChange={this.handleChange} />{this.state.motdepasseErr}
+              	<input className="form-control" type="password" id="motdepasse" placeholder="motdepasse" onChange={this.handleChange} />{this.state.motdepasseErr}
               </div>
               <div className="col-sm-12 inscription">
                 <input value="S'inscrire" className="special big" type="submit" />

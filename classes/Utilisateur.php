@@ -33,21 +33,16 @@ class Utilisateur implements JsonSerializable{
 
     public static function seConnecter($identifiant, $mdp){
         $dbh = Database::connect();
-        $query = "SELECT * FROM Utilisateur WHERE identifiant=?";
+        $query = "SELECT * FROM Utilisateur WHERE identifiant=? AND mdp=?";
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS,'Utilisateur');
-        $sth->execute(array($identifiant));
+        $sth->execute(array($identifiant,sha1($mdp."seldeprotection")));
         if ($sth->rowCount()>0){
             $reponse = $sth->fetch();
-            if($reponse->mdp==$mdp){
-                self::initialiserLaSession($reponse);
-            }
-            else{
-                $reponse = "Mot de passe incorrect"; //Le mieux est de lancer une exception qui sera catchée
-            }
+            self::initialiserLaSession($reponse);
         }
         else{
-            $reponse = "Identifiant inexistant";
+            $reponse = "Identifiant ou mot de passe incorrect !";
         }
         $dbh = NULL;
         return $reponse;
@@ -61,14 +56,14 @@ class Utilisateur implements JsonSerializable{
         $query = "INSERT INTO Utilisateur (nom,prenom,identifiant,mdp,admin) VALUES (?,?,?,?,?)";
         $sth = $dbh->prepare($query);
         try{
-            $sth->execute(array($nom,$prenom,$identifiant,$mdp,$admin));
+            $sth->execute(array($nom,$prenom,$identifiant,sha1($mdp."seldeprotection"),$admin));
         }catch(PDOException $e){
             $dbh=NULL;
             throw $e;
         }
         $dbh=NULL;
         if($boolean)
-            return self::seConnecter($identifiant,$mdp);
+            return self::seConnecter($identifiant,sha1($mdp."seldeprotection"));
     }
 
     public static function verifierLesParametres($nom,$prenom,$identifiant,$mdp){
@@ -141,6 +136,10 @@ class Utilisateur implements JsonSerializable{
         $query = "INSERT INTO Objet (lostBy,nom,description) VALUES (?,?,?)";
         $sth = $dbh->prepare($query);
         $sth->execute(array($this->idu,$nom,$description));
+        if($lieux==null){
+            $dbh = NULL;
+            return;
+        }
         $ido = $dbh->lastInsertId();
         $query = "INSERT INTO Enregistrementobjetlieu (ido,idl) VALUES (?,?)";
         $sth = $dbh->prepare($query);
