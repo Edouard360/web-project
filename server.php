@@ -38,7 +38,7 @@ function routeRequest()
     $uri = $_SERVER['REQUEST_URI'];
 
     switch($uri){
-        case '/':
+        case '/Home':
             if(is_null($_SESSION["id"])){
                 header('Location: /Connexion');
             }
@@ -53,9 +53,39 @@ function routeRequest()
                 file_get_contents('./public/scripts/Affiche/Objet.js').
                 file_get_contents('./public/scripts/Filter/FilterBar.js').
                 file_get_contents('./public/scripts/Affiche/ListeAffiche.js').
+                file_get_contents('./public/scripts/Lieu/Lieu.js').
+                file_get_contents('./public/scripts/Lieu/LieuForm.js').
+                file_get_contents('./public/scripts/Lieu/ListeLieu.js').
+                file_get_contents('./public/scripts/Lieu/LieuMap.js').
+                file_get_contents('./public/scripts/App/App.js').
+                file_get_contents('./public/scripts/App/Home.js').
                 '</script>';
-                //echo '<script type="text/babel" src="scripts/declaration.js"></script>';
-                //echo '<script type="text/babel" src="scripts/essai.js"></script>';
+                break;  
+            }
+            break;
+        case '/Lieux':
+            if(is_null($_SESSION["id"])){
+                header('Location: /Connexion');
+            }
+            else{
+                echo file_get_contents('./public/index.html');
+                echo '<script type="text/babel">'.
+                file_get_contents('./public/scripts/Affiche/Autobar/Autobar.js').
+                file_get_contents('./public/scripts/Affiche/Autobar/LieuAutobar.js').
+                file_get_contents('./public/scripts/Lieu/Lieu.js').
+                file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
+                file_get_contents('./public/scripts/Affiche/ObjetForm.js').
+                file_get_contents('./public/scripts/Affiche/Objet.js').
+                file_get_contents('./public/scripts/Filter/FilterBar.js').
+                file_get_contents('./public/scripts/Affiche/ListeAffiche.js').
+                file_get_contents('./public/scripts/Lieu/Lieu.js').
+                file_get_contents('./public/scripts/Lieu/LieuForm.js').
+                file_get_contents('./public/scripts/Lieu/ListeLieu.js').
+                file_get_contents('./public/scripts/Lieu/LieuMap.js').
+                file_get_contents('./public/scripts/App/App.js').
+                file_get_contents('./public/scripts/App/Lieux.js').
+                '</script>';
+                break;  
             }
             break;
         case '/Connexion':
@@ -64,6 +94,8 @@ function routeRequest()
                 echo '<script type="text/babel">'.
                 file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
                 file_get_contents('./public/scripts/Connexion-Inscription/Connexion.js').
+                file_get_contents('./public/scripts/App/App.js').
+                file_get_contents('./public/scripts/App/Connexion.js').
                 '</script>';
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $u=Utilisateur::seConnecter($_POST['identifiant'],$_POST['motdepasse']);
@@ -76,7 +108,7 @@ function routeRequest()
                 if(!is_null($_SESSION["id"])){
                     $u=Utilisateur::getUtilisateur($_SESSION["id"]);
                     echo json_encode(array( "result"=>json_decode(json_encode($u)) ) );
-                }   
+                } else echo 0;   
             }
             break;
         case '/Deconnexion':
@@ -261,7 +293,7 @@ function routeRequest()
                 file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
                  file_get_contents('./public/scripts/Utilisateur/ListeUtilisateur.js').
                 '</script>';
-                break;                 
+                break;                        
         case '/Mock':
             echo file_get_contents('./public/mapHugo.html');
             break;

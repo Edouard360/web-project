@@ -1,6 +1,6 @@
 var ListeAffiche = React.createClass({
   getInitialState: function() {
-    return {objets: [], lieux: [],user:{},value:""};
+    return {objets: [], lieux: [],value:""};
   },
   componentDidMount: function() {
    this.loadFromServer();
@@ -32,17 +32,7 @@ var ListeAffiche = React.createClass({
         this.setState({lieux :data});
       }.bind(this)
     });
-    $.ajax({
-      url: "/Connexion",
-      type: "put",
-      dataType: "json",
-      success: function(data) {
-        if(data.result){
-          this.setState({user:data.result});
-          console.log(data.result);
-        }
-        }.bind(this),
-      }); 
+   
   },
     handleDelete:function(ido){
       $.ajax({
@@ -87,7 +77,7 @@ var ListeAffiche = React.createClass({
     render: function() {
       var objets = this.state.objets.filter(this.filtre).map(function(props) {
         return (
-         <Affiche {...props} user={this.state.user} key={props.objet.ido} handleDelete={this.handleDelete} handleDeclare={this.handleDeclare} handleUndeclare={this.handleUndeclare}> 
+         <Affiche {...props} user={this.props.user} key={props.objet.ido} handleDelete={this.handleDelete} handleDeclare={this.handleDeclare} handleUndeclare={this.handleUndeclare}> 
             	//après on rajoute le send message.
             	</Affiche>
               );
@@ -116,13 +106,13 @@ var ListeAffiche = React.createClass({
     },
 });
 
-
+/*
 ReactDOM.render(
   <ListeAffiche />,
   document.getElementById('content4')
 );
 
-
+*/
 
 
 

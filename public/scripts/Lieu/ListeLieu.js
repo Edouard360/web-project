@@ -1,6 +1,6 @@
 var ListeLieu = React.createClass({
 	getInitialState: function() {
-    	return {lieux: [],value:"",user:{}};
+    	return {lieux: [],value:""};
   	},
   	componentDidMount: function() {
    		this.loadFromServer();
@@ -47,7 +47,7 @@ var ListeLieu = React.createClass({
 	render:function(){
 		var lieux = this.state.lieux.filter(this.filtre).map(function(props) {
 			return (
-     		<Lieu canDelete={parseInt(this.state.user.admin)===1} key={props.idl} {...props} handleDelete={this.handleDelete}> 
+     		<Lieu canDelete={parseInt(this.props.user.admin)===1} key={props.idl} {...props} handleDelete={this.handleDelete}> 
         	//après on rajoute le send message.
         	</Lieu>
           );

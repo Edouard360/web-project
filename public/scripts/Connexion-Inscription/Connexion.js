@@ -1,21 +1,12 @@
 var Connexion = React.createClass({
-
 	getInitialState: function() {
-		return {connected:false,toggle:false,msg:"",utilisateur:{}};
+		return {connected:false,toggle:false,msg:""};
 	},
 	componentDidMount:function(){
-		$.ajax({
-			url: "/Connexion",
-			type: "put",
-			dataType: "json",
-			success: function(data) {
-				if(data.result){
-					this.setState({utilisateur:data.result});
-					this.setState({connected:true});
-					this.setState({toggle:false});
-				}
-    		}.bind(this),
-    	});	
+		if(this.props.user.nom){
+			this.setState({connected:true});
+			this.setState({toggle:false});
+		}
 	},
 	toggle: function(){
 		this.setState({toggle:!this.state.toggle,msg:""});
@@ -31,7 +22,7 @@ var Connexion = React.createClass({
 				if(data.result){
 					console.log("Connexion effective en tant que:");
 					console.log(data.result);
-					this.setState({utilisateur:data.result});
+					this.props.connect(data.result);
       				this.setState({connected:true});
       				this.setState({toggle:false});
       				this.setState({msg:''});
@@ -75,7 +66,7 @@ var Connexion = React.createClass({
 		var formbool = !this.state.connected && this.state.toggle;
 		var lienbool = !this.state.connected && !this.state.toggle;
 		var greet = <div className="col-sm-12 inscription" > <h3>Connecté en tant que</h3> 
-		<Utilisateur {...this.state.utilisateur} /></div>
+		<Utilisateur {...this.props.user} /></div>
 		return(
 			<section id="three" className="wrapper style3 special">
 				<div className="container">
@@ -106,10 +97,7 @@ var Connexion = React.createClass({
 	}
 });
 
-ReactDOM.render(
-  <Connexion />,
-  document.getElementById('content2')
-);
+
 
 
 

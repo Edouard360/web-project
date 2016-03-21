@@ -44,7 +44,7 @@ var Affiche = React.createClass({
 
             {this.props.foundBy.nom?retrouve:""}
         <div>    
-            {this.props.user.idu===this.props.lostBy.idu||this.props.user.admin ? supprimer:""}
+            {this.props.user.idu===this.props.lostBy.idu||parseInt(this.props.user.admin)!==0 ? supprimer:""}
             {this.props.foundBy.idu===this.props.user.idu ? undeclare:""}
             {!this.props.foundBy.idu?declarer:""}
         </div> 
