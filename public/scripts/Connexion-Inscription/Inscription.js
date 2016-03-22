@@ -14,22 +14,22 @@ var Inscription = React.createClass({
           <form onSubmit={this.inscription}>
             <div>
               <div className="col-sm-6 inscription">
-                <input className="form-control" type="text" id="nom" placeholder="nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
+                <input className="form-control" type="text" id="nom" placeholder="Nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
               </div>
               <div className="col-sm-6 inscription">
-                <input className="form-control" type="text" id="prenom" placeholder="prenom" onChange={this.handleChange} />{this.state.prenomErr}
+                <input className="form-control" type="text" id="prenom" placeholder="Prénom" onChange={this.handleChange} />{this.state.prenomErr}
               </div>
               <div className="col-sm-12 inscription">
-              	<input className="form-control" type="text" id="identifiant" placeholder="identifiant" onChange={this.handleChange} />{this.state.identifiantErr}
+              	<input className="form-control" type="text" id="identifiant" placeholder="Identifiant" onChange={this.handleChange} />{this.state.identifiantErr}
               </div>
               <div className="col-sm-12 inscription">
-              	<input className="form-control" type="password" id="motdepasse" placeholder="motdepasse" onChange={this.handleChange} />{this.state.motdepasseErr}
+              	<input className="form-control" type="password" id="motdepasse" placeholder="Mot De Passe" onChange={this.handleChange} />{this.state.motdepasseErr}
               </div>
               <div className="col-sm-12 inscription">
                 <input value="S'inscrire" className="special big" type="submit" />
               </div>
               <div className="col-sm-12 inscription">
-				<input value="Connexion" className="special small" type="button" onClick={()=>ReactDOM.render(<Connexion user={{}} />, document.getElementById('content2') )}/>
+				<input value="Connexion" className="special small" type="button" onClick={()=>ReactDOM.render(<Connexion user={{}} connect={this.props.connect}/>, document.getElementById('content2') )}/>
 		      </div>
             </div>
           </form>
@@ -64,7 +64,7 @@ var Inscription = React.createClass({
 			success: function(data) {
 				if(data.error){
 					console.log(data.error);
-					this.setState({nomErr: data.error.nomErr,prenomErr: data.error.prenomErr,identifiantErr: data.error.identifiantErr,motdepasseErr: data.error.mdpErr});
+					this.setState({nomErr: data.error.nom,prenomErr: data.error.prenom,identifiantErr: data.error.identifiant,motdepasseErr: data.error.motdepasse});
 				}else{
 					console.log(data.result);
 					this.setState({nomErr:'',prenomErr:'',identifiantErr:'',motdepasseErr:''});

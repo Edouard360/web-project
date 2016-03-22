@@ -28,7 +28,7 @@ var ObjetForm = React.createClass({
 			        <h3>FORMULAIRE</h3>
 			        <h5>A remplir si vous avez perdu quelque chose</h5>
 			        <hr/>
-			        {form}
+			        {this.props.user.nom?form:"Vous devez d'abord vous connecter"}
 		        </div>
 		        </section>
 	},
@@ -48,26 +48,20 @@ var ObjetForm = React.createClass({
 	},
 	soumettreObjet:function(e){
 		e.preventDefault();
-		console.log(e.target);
 		$.ajax({
 			url: "/AjouterUnObjet",
 			type: "post",
+			dataType: "json",
 			data: {nom: this.state.nom, description: this.state.description, lieux:this.state.lieux.map(function(props){return props.idl;})},
 			success: function(data) {
 				console.log(data);
 				if(data.error){
-					console.log(data.error);
-					this.setState({nomErr: data.error.nomErr,descriptionErr: data.error.descriptionErr});
+					this.setState({nomErr: data.error.nom,descriptionErr: data.error.description});
 				}else{
 					console.log(data.result);
 					this.setState({nom:'', description:'',nomErr:'Bien soumis',descriptionErr:'OK'});
 				}
     		}.bind(this),
-    		error: function(xhr, status, err) {
-      			console.log(xhr.responseText);
-      			console.log(status);
-      			console.log(err.st);
-    		}.bind(this)
 		});
 	},
 });

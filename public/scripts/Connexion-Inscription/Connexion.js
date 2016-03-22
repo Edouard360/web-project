@@ -62,7 +62,7 @@ var Connexion = React.createClass({
 		                <input value="Connexion" className="special small" type="submit"/>
 		            </div>
 		var lien = 	<div className="col-sm-12 inscription">
-						<input value="Inscription" className="special small" type="button" onClick={()=>ReactDOM.render(<Inscription />, document.getElementById('content2') )}/>
+						<input value="Inscription" className="special small" type="button" onClick={()=>ReactDOM.render(<Inscription connect={this.props.connect} />, document.getElementById('content2') )}/>
 		            </div>		
 		var formbool = !this.state.connected && this.state.toggle;
 		var lienbool = !this.state.connected && !this.state.toggle;

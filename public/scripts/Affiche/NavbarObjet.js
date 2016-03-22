@@ -2,7 +2,7 @@ var NavbarObjet = React.createClass({
   switch:function(active){
     switch(active) {
     case "ObjetForm":
-        ReactDOM.render( <ObjetForm data={this.props.lieux} />, document.getElementById('content2') );
+        ReactDOM.render( <ObjetForm data={this.props.lieux} user={this.props.user} />, document.getElementById('content2') );
         break;
     case "ListeAffiche":
         ReactDOM.render( <ListeAffiche user={this.props.user} />, document.getElementById('content2') );

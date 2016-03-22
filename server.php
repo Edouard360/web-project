@@ -1,11 +1,19 @@
 <?php
+session_name("ProjetModal2016HugoetEdouard");
 session_start();
+
+if (!isset($_SESSION['initiated'])) {
+        session_regenerate_id();
+        $_SESSION['initiated'] = true;
+    }
+
+
 require("./classes/Database.php");
+require("./classes/Helpers/Helpers.php");
 require("./classes/Objet.php");
 require("./classes/Utilisateur.php");
 require("./classes/Lieu.php");
 require("./classes/Message.php");
-
 
 
 
@@ -14,7 +22,7 @@ require("./classes/Message.php");
 error_reporting(E_ALL);  
 ini_set('display_errors','On');
 
-
+//filter_input_array()
 
 //Production
 error_reporting(E_ALL);  
@@ -27,6 +35,7 @@ ini_set('error_log', '/error/path');
 //ini_set('session.use', newvalue)
 //Initialisation de la session a faire
 //echo (htmlspecialchars(...) sinon faille de securite )
+//SEULEMENT APRES !!!
 //SHA_1 GOogle hacking
 //Inserer du sel
 //https crypte les communications
@@ -61,6 +70,16 @@ function routeRequest()
     //https://www.owasp.org
     $uri = $_SERVER['REQUEST_URI'];
     $dbh = Database::connect();
+
+    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+    // last request was more than 30 minutes ago
+    session_unset();     // unset $_SESSION variable for the run-time 
+    session_destroy();   // destroy session data in storage
+    }
+    $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+
+
+
 
     switch($uri){
         case '/':
@@ -159,11 +178,14 @@ function routeRequest()
             break;
         case '/AjouterUnObjet':
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $u = Utilisateur::getUtilisateur($_SESSION['id']);
+                $u = Utilisateur::getUtilisateur($dbh, $_SESSION['id']);
                 if(is_null($u)){
                     header('Location: /Connexion');
-                }else{
-                    $u->ajouterUnObjet($dbh, $_POST["nom"],$_POST["description"],$_POST["lieux"]);
+                }else{                    
+                    $u = $u->ajouterUnObjet($dbh, $_POST["nom"],$_POST["description"],$_POST["lieux"]);
+                    if(is_array($u) && isset($u["error"])){
+                        echo json_encode($u);
+                    }
                 }
             }
             break;
@@ -179,17 +201,17 @@ function routeRequest()
             break;
         case '/DeclarerAvoirTrouveUnObjet':
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $u = Utilisateur::getUtilisateur($_SESSION['id']);
+                $u = Utilisateur::getUtilisateur($dbh,$_SESSION['id']);
                 if(is_null($u)){
                     header('Location: /Connexion');
                 }else{
-                    $u->declarerAvoirTrouveUnObjet($_POST["ido"]);
+                    $u->declarerAvoirTrouveUnObjet($dbh,$_POST["ido"]);
                 }
             }
             break;
         case '/RetirerDeclaration':
             if($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $u = Utilisateur::getUtilisateur($_SESSION['id']);
+                $u = Utilisateur::getUtilisateur($dbh,$_SESSION['id']);
                 if(is_null($u)){
                     header('Location: /Connexion');
                 }else{
@@ -199,7 +221,10 @@ function routeRequest()
             break;
         case '/AjouterUnLieu':
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                Lieu::ajouterUnLieu($dbh, $_POST["tag"], $_POST["lat"], $_POST["lng"]);   
+                $u=Lieu::ajouterUnLieu($dbh, $_POST["tag"], $_POST["lat"], $_POST["lng"]);
+                if(is_array($u) && isset($u["error"])){
+                        echo json_encode($u);
+                    }   
             }
             break;
         case '/SupprimerUnLieu':
@@ -257,7 +282,37 @@ function routeRequest()
             }
             break; 
          case '/Test3':
-         echo file_get_contents('./public/index copy.html');
+         echo file_get_contents('./public/debug.html');
+            break;
+        case '/Test4':
+        function validate_nom($input){
+            if(strlen($input)>4)
+                return "OK";
+            else return null;
+        }
+        function validate_description($input){
+            if(strlen($input)>3)
+                return "Nom trop court";
+            else if (strlen($input)>10)
+                return "Nom trop long";
+            else 
+                return null;
+        }
+        $options = array(
+                            'nom' => array(
+                                    'filter' => FILTER_CALLBACK, 
+                                    'options' => 'validate_nom'
+                            ),
+                            'description' => array(
+                                    'filter' => FILTER_CALLBACK, //Valider l'entier.
+                                    'options' => 'validate_description'
+                            )
+                        );
+        $resultat = filter_input_array(INPUT_POST, $options);
+
+          
+         echo print_r($resultat);
+         echo $resultat==null;
             break;
         default:
             return false;

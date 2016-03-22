@@ -44,7 +44,8 @@ var ListeAffiche = React.createClass({
         type: "post",
         data:{ido:ido},
         success: function() {
-          //console.log("nice");
+
+          console.log("nice");
           this.loadFromServer();
         }.bind(this)
       });

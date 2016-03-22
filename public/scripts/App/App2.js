@@ -11,9 +11,9 @@ var App2 = React.createClass({
     }
   },
   componentWillMount:function(){
-    this.loadFromServer();
+    this.loadFromServer1();
   },
-  loadFromServer:function(){
+  loadFromServer1:function(){
     $.ajax({
       url: "/Connexion",
       type: "put",
@@ -21,18 +21,21 @@ var App2 = React.createClass({
       success: function(data) {
         if(data.result){
           this.setState({user:data.result}); 
+          this.loadFromServer2();
         }
-        this.switch(this.props.active); 
         }.bind(this),
-      });
+      });     
+  },
+  loadFromServer2:function(){
     $.ajax({
       url: "/ChargerLesLieux",
       type: "get",
       dataType: 'json',
       success: function(data) {
         this.setState({lieux :data});
+        this.switch(this.props.active);
       }.bind(this)
-    }); 
+      });
   },
   switch:function(active){
     switch(active) {
@@ -44,12 +47,13 @@ var App2 = React.createClass({
     case "Lieux":
         this.setState({Home:"",Lieux:"active",Connexion:"",Docs:"",Users:""});
         ReactDOM.render( <ListeLieu user={this.state.user} />, document.getElementById('content2') );
-        ReactDOM.render( <NavbarLieu user={this.state.user}/>, document.getElementById('content3') )
+        ReactDOM.render( <NavbarLieu user={this.state.user}/>, document.getElementById('content3') );
         break;
     case "Connexion":
         this.setState({Home:"",Lieux:"",Connexion:"active",Docs:"",Users:""});
         console.log(this.state.user);
         ReactDOM.render( <Connexion user={this.state.user} connect={this.connect} />, document.getElementById('content2') );
+        ReactDOM.unmountComponentAtNode(document.getElementById('content3'));
         break;     
     case "Docs":
         this.setState({Home:"",Lieux:"",Connexion:"",Docs:"active",Users:""});

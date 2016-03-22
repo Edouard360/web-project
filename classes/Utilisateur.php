@@ -45,7 +45,7 @@ class Utilisateur implements JsonSerializable{
     }
 
     public static function creerUnNouvelUtilisateur($dbh,$nom,$prenom,$identifiant,$mdp,$admin,$boolean){
-        if(is_array($u=self::verifierLesParametres($nom,$prenom,$identifiant,$mdp))){
+        if(is_array($u=Helpers::verifierLesParametresInscription($nom,$prenom,$identifiant,$mdp))){
             return(array("error"=>$u));
         } 
         $query = "INSERT INTO Utilisateur (nom,prenom,identifiant,mdp,admin) VALUES (?,?,?,?,?)";
@@ -57,28 +57,6 @@ class Utilisateur implements JsonSerializable{
         }
         if($boolean)
             return self::seConnecter($dbh,$identifiant,sha1($mdp."seldeprotection"));
-    }
-
-    public static function verifierLesParametres($nom,$prenom,$identifiant,$mdp){
-        if(strlen($nom) < 3){
-            $array=array("nomErr" => "Nom trop court !");
-        }
-        if(strlen($prenom) < 3){
-            $tmp=array("prenomErr" => "Prenom trop court !");
-            $array=$array?array_merge($tmp,$array):$tmp;
-        }
-        if(strlen($identifiant) < 3){
-            $tmp=array("identifiantErr" => "Identifiant trop court !");
-            $array=$array?array_merge($tmp,$array):$tmp;
-        }
-        if(strlen($mdp) < 3){
-            $tmp=array("mdpErr" => "mdp trop court !");
-            $array=$array?array_merge($tmp,$array):$tmp;
-        }
-        if($array)
-            return $array;
-        else
-            return true;
     }
 
     public static function initialiserLaSession($utilisateur){
@@ -117,6 +95,9 @@ class Utilisateur implements JsonSerializable{
     }
 
     public function ajouterUnObjet($dbh,$nom,$description,$lieux){
+        if(is_array($u=Helpers::verifierLesParametresObjet($nom,$prenom,$identifiant,$mdp))){
+            return(array("error"=>$u));
+        } 
         $query = "INSERT INTO Objet (lostBy,nom,description) VALUES (?,?,?)";
         $sth = $dbh->prepare($query);
         $sth->execute(array($this->idu,$nom,$description));
