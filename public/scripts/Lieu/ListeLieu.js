@@ -53,7 +53,7 @@ var ListeLieu = React.createClass({
           );
   		}.bind(this));
 		return(
-			<section id="one" className="wrapper style1 special">
+			<section id="one" className="wrapper style1 special Lieu">
 	          <header className="major">
 	            <h2>LIEUX</h2>
 	            <p>Votre lieu n'est pas dans la liste ? Créez le !</p>

@@ -30,7 +30,7 @@ var ListeUtilisateur = React.createClass({
       }.bind(this));
     var greetadmin = <p>Vous êtes admin ! <br/> Vous pouvez conférer votre statut ou désinscrire les autres utilisateurs...</p>  
     return(
-      <section id="one" className="wrapper style1 special">
+      <section id="one" className="wrapper style1 special Utilisateur">
           <header className="major">
             <h2>UTILISATEURS</h2>
             {(this.props.user.admin===1) ?greetadmin:""}

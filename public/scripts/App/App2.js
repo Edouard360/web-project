@@ -34,6 +34,7 @@ var App2 = React.createClass({
     case "Lieux":
         this.setState({Home:"",Lieux:"active",Connexion:"",Docs:"",Users:""});
         ReactDOM.render( <ListeLieu user={this.state.user} />, document.getElementById('content2') );
+        ReactDOM.render(<Navbar />, document.getElementById('content3') )
         break;
     case "Connexion":
         this.setState({Home:"",Lieux:"",Connexion:"active",Docs:"",Users:""});

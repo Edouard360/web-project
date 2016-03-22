@@ -83,6 +83,7 @@ function routeRequest()
             file_get_contents('./public/scripts/Lieu/LieuForm.js').
             file_get_contents('./public/scripts/Lieu/ListeLieu.js').
             file_get_contents('./public/scripts/Lieu/LieuMap.js').
+            file_get_contents('./public/scripts/App/Navbar.js').
             file_get_contents('./public/scripts/App/App2.js').
             '</script>';
             break;       

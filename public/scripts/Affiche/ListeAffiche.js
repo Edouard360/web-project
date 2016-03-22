@@ -83,7 +83,7 @@ var ListeAffiche = React.createClass({
               );
       }.bind(this));
       return (
-        <section id="one" className="wrapper style1 special">
+        <section id="one" className="wrapper style1 special Affiche">
           <header className="major">
             <h2>OBJETS PERDUS</h2>
             <p>Si vous avez perdu quelque chose, faites-le savoir !</p>
