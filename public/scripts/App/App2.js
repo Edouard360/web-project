@@ -6,6 +6,7 @@ var App2 = React.createClass({
       Connexion:"",
       Docs:"",
       Users:"",
+      lieux: [],
       user:{}
     }
   },
@@ -23,18 +24,27 @@ var App2 = React.createClass({
         }
         this.switch(this.props.active); 
         }.bind(this),
-      }); 
+      });
+    $.ajax({
+      url: "/ChargerLesLieux",
+      type: "get",
+      dataType: 'json',
+      success: function(data) {
+        this.setState({lieux :data});
+      }.bind(this)
+    }); 
   },
   switch:function(active){
     switch(active) {
     case "Home":
         this.setState({Home:"active",Lieux:"",Connexion:"",Docs:"",Users:""});
         ReactDOM.render( <ListeAffiche user={this.state.user} />, document.getElementById('content2') );
+        ReactDOM.render(<NavbarObjet user={this.state.user} lieux={this.state.lieux} />, document.getElementById('content3') )
         break;
     case "Lieux":
         this.setState({Home:"",Lieux:"active",Connexion:"",Docs:"",Users:""});
         ReactDOM.render( <ListeLieu user={this.state.user} />, document.getElementById('content2') );
-        ReactDOM.render(<Navbar />, document.getElementById('content3') )
+        ReactDOM.render( <NavbarLieu user={this.state.user}/>, document.getElementById('content3') )
         break;
     case "Connexion":
         this.setState({Home:"",Lieux:"",Connexion:"active",Docs:"",Users:""});
@@ -62,8 +72,7 @@ var App2 = React.createClass({
       this.switch(event.target.parentElement.id);
     else{
       this.switch(event.target.id);
-    }
-    
+    }  
     
   },
   render:function(){

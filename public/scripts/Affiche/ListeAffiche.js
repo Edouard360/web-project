@@ -1,6 +1,6 @@
 var ListeAffiche = React.createClass({
   getInitialState: function() {
-    return {objets: [], lieux: [],value:""};
+    return {objets: [], value:""};
   },
   componentDidMount: function() {
    this.loadFromServer();
@@ -23,16 +23,7 @@ var ListeAffiche = React.createClass({
          });
         this.setState({objets :data});
       }.bind(this)
-    });
-    $.ajax({
-      url: "/ChargerLesLieux",
-      type: "get",
-      dataType: 'json',
-      success: function(data) {
-        this.setState({lieux :data});
-      }.bind(this)
-    });
-   
+    }); 
   },
     handleDelete:function(ido){
       $.ajax({
@@ -86,17 +77,8 @@ var ListeAffiche = React.createClass({
         <section id="one" className="wrapper style1 special Affiche">
           <header className="major">
             <h2>OBJETS PERDUS</h2>
-            <p>Si vous avez perdu quelque chose, faites-le savoir !</p>
+            <p>Vous pouvez consulter la liste d'Objets</p>
           </header>
-          <div className="container form">
-        <h3>FORMULAIRE</h3>
-        <h5>A remplir si vous avez perdu quelque chose</h5>
-        <hr/>
-        <ObjetForm data={this.state.lieux} />
-        </div>
-        <header className="major">
-        <p>Vous pouvez consulter la liste d'Objets</p>
-        </header>
           <div className="container filtre">
           Filtrer les Objets par Nom
         <FilterBar value={this.state.value} handleChange={this.handleChange} />

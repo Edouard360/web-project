@@ -4,7 +4,6 @@ var ObjetForm = React.createClass({
 	},
 	render:function(){
 		var form = 
-   
           <form onSubmit={this.soumettreObjet}>
               <div className="form-group">
               	<label >Nom</label>
@@ -17,13 +16,21 @@ var ObjetForm = React.createClass({
               <LieuAutobar data={this.props.data} lieux={this.state.lieux} add={this.add} />
               <hr />
               <div>
-        
                   <input value="Enregistrer" className="special small" type="submit" />   
               </div>
-          
           </form>
-
-		return form;
+		return <section id="one" className="wrapper style1 special Affiche">
+		          <header className="major">
+		            <h2>OBJETS PERDUS</h2>
+		            <p>Si vous avez perdu quelque chose, faites-le savoir !</p>
+		          </header>
+		          <div className="container form">
+			        <h3>FORMULAIRE</h3>
+			        <h5>A remplir si vous avez perdu quelque chose</h5>
+			        <hr/>
+			        {form}
+		        </div>
+		        </section>
 	},
 	add:function(lieu){
 		this.setState({lieux:this.state.lieux.concat(lieu)});//la il faut changer !!

@@ -65,12 +65,7 @@ var ListeLieu = React.createClass({
 		        <div className="listeaffiches">
 					{lieux}
 		        </div>
-		        <div className="container form">
-			        <h3>FORMULAIRE</h3>
-			        <h5>A remplir si vous voulez créer un lieu</h5>
-			        <hr/>
-			        <LieuForm data={this.state.lieux} />
-		        </div>
+		        
 	        </section>
 		)
 	}

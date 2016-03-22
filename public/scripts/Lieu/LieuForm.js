@@ -19,7 +19,14 @@ var LieuForm = React.createClass({
               </div>
           </form>
 
-		return form;
+		return <section id="one" className="wrapper style1 special Lieu">
+			<div className="container form">
+			    <h3>FORMULAIRE</h3>
+			    <h5>A remplir si vous voulez créer un lieu</h5>
+			    <hr/>
+			    {form}
+		    </div>
+		</section>
 	},
 	updatePosition(latLng){
 		this.setState({latitude:latLng.lat(),longitude:latLng.lng()});
