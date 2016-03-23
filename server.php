@@ -147,7 +147,7 @@ function routeRequest()
                 echo Helpers::testInscription($dbh);
             }
             break;
-        case 'EditProfile':
+        case '/EditProfile':
             if(!is_null($_SESSION["id"])){
                 echo Helpers::testUpdate($dbh);
             } else echo 0; 
