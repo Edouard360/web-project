@@ -150,7 +150,7 @@ function routeRequest()
         case '/EditProfile':
             if(!is_null($_SESSION["id"])&& $_SERVER['REQUEST_METHOD'] === 'POST'){
                 echo Helpers::testUpdate($dbh);
-            } else echo 0; 
+            } 
             break;
         case '/ChargerLesObjets':
             if($_SERVER['REQUEST_METHOD'] === 'GET') {
