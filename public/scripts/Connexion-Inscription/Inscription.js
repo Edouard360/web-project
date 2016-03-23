@@ -90,10 +90,8 @@ var InscriptionValide = React.createClass({
             <h2 >INSCRIPTION VALIDÉE</h2>
             <p> Votre inscription a bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
             <i className="fa fa-cog fa-spin fa-5x"></i>
+            <p> Vous pouvez maintenant naviguer sur le site et profitez de toutes ses fonctionnalités !</p>
           </header>
-           <p> Votre inscription a bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
-
-
         </div>
       </section>
 		return form;

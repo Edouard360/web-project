@@ -97,3 +97,9 @@ form.navbar-form.navbar-left.navbar-fixed-top.special-fix > ul {}
 
 
 .wrapper.style1.special.Utilisateur{padding-left: 25%;padding-right: 5%;}
+
+.text-form{
+	font-size: 12px;
+	line-height: 3;
+	text-align: left;
+}

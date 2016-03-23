@@ -44,7 +44,6 @@ var ListeAffiche = React.createClass({
         type: "post",
         data:{ido:ido},
         success: function() {
-
           console.log("nice");
           this.loadFromServer();
         }.bind(this)
@@ -61,7 +60,12 @@ var ListeAffiche = React.createClass({
         }.bind(this)
       });
     },
-    filtre:function(props){ return(props.objet.nom.toLowerCase().indexOf(this.state.value) !== -1) },
+    filtre:function(props){
+      if(this.state.value==undefined)
+        return true;
+      else
+        return(props.objet.nom.toLowerCase().indexOf(this.state.value.toLowerCase()) !== -1)
+    },
     handleChange:function(value){
       this.setState({value:value});
       //console.log(this.state.entier);

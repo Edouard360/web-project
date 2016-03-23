@@ -17,7 +17,7 @@ class Objet{
 	        LEFT OUTER JOIN Utilisateur u2 ON o.foundBy=u2.idu
 	        LEFT OUTER JOIN Enregistrementobjetlieu e ON o.ido=e.ido
 	        LEFT OUTER JOIN Lieu l ON l.idl=e.idl
-	        GROUP BY ido";
+	        GROUP BY ido ORDER BY o.date DESC";
         $sth = $dbh->prepare($query);
         $sth->execute();
         $reponse = $sth->fetchAll(PDO::FETCH_OBJ);

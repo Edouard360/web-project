@@ -10,7 +10,9 @@ var EditProfile = React.createClass({
 		<section id="three" className="wrapper style3 special">
         <div className="container">
           <header className="major">
-            <h2 >INSCRIPTION</h2>
+            <h2 >ÉDITER VOTRE COMPTE</h2>
+            <p> Vous pouvez modifiez les informations de votre profil !</p>
+            <i className="fa fa-pencil fa-3x"></i>
           </header>
         </div>
         <div className="container">
@@ -29,11 +31,8 @@ var EditProfile = React.createClass({
               	<input className="form-control" type="password" id="motdepasse" placeholder="Mot De Passe" onChange={this.handleChange} />{this.state.motdepasseErr}
               </div>
               <div className="col-sm-12 inscription">
-                <input value="S'inscrire" className="special big" type="submit" />
+                <input value="Éditer mon profil" className="special" type="submit" />
               </div>
-              <div className="col-sm-12 inscription">
-				<input value="Connexion" className="special small" type="button" onClick={()=>ReactDOM.render(<Connexion user={{}} connect={this.props.connect}/>, document.getElementById('content2') )}/>
-		      </div>
             </div>
           </form>
         </div>
@@ -72,7 +71,8 @@ var EditProfile = React.createClass({
 				}else{
 					this.setState({nomErr:'',prenomErr:'',identifiantErr:'',motdepasseErr:''});
 					ReactDOM.render(<App2 active="Connexion" user={data.result} />,document.getElementById('content1'));
-					ReactDOM.render(<UpdateValide user={data.result} />,document.getElementById('content2'));	
+					ReactDOM.render(<UpdateValide user={data.result} />,document.getElementById('content2'));
+					console.log(data.result);
 				}
     		}.bind(this),
     		error: function(xhr, status, err) {
@@ -91,18 +91,19 @@ var UpdateValide = React.createClass({
 		<section id="three" className="wrapper style3 special">
         <div className="container">
           <header className="major">
-            <h2 >INSCRIPTION VALIDÉE</h2>
-            <p> Votre inscription a bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
+            <h2 >MODIFICATIONS PRISES EN COMPTE</h2>
+            <br/>
+            <p> Vos modifications ont bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
             <i className="fa fa-cog fa-spin fa-5x"></i>
+            <br/><br/>
+            <p> Les objets que vous avez perdus ou retrouvés n'ont pas changé !</p>
           </header>
-           <p> Votre inscription a bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
-
-
         </div>
       </section>
 		return form;
 	}
 });
+
 
 
 /*

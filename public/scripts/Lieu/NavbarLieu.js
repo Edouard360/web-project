@@ -23,8 +23,8 @@ var NavbarLieu = React.createClass({
       <form className="navbar-form navbar-left navbar-fixed-top special-fix" role="search">
       <div className="navbar-collapse collapse sidebar-navbar-collapse">
           <ul className="nav navbar-nav">
-            <li role="presentation" onClick={this.avoidReload} ><a href="#" id="ListeLieu"  ><i className="fa fa-key" id="ListeLieu" ></i>ListeLieu</a></li>
-            <li role="presentation" onClick={this.avoidReload} ><a href="#" id="LieuForm"  ><i className="fa fa-key" id="LieuForm" ></i>LieuForm</a></li>
+            <li role="presentation" className="sidey" onClick={this.avoidReload} ><a href="#" id="ListeLieu"  ><i className="fa fa-list" id="ListeLieu" ></i>&nbsp; Liste</a></li>
+            <li role="presentation" className="sidey" onClick={this.avoidReload} ><a href="#" id="LieuForm"  ><i className="fa fa-file-text" id="LieuForm" ></i>&nbsp; Formulaire </a></li>
           </ul>
         </div>
       </form>

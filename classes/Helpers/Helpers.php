@@ -84,31 +84,26 @@ class Helpers{
     }
 
     public static function verifierLesParametresObjet(){
-        $erreur=0;
         function validate_nom($input){
             if($input==null){
-                $erreur++;
                 return "Pas d'Objet !";
             }else if(strlen($input)<3){
-                $erreur++;
                 return "Nom plus descriptif";
+            }else if(strlen($input)>15){
+                return "Nom trop long...";
             }
             else return null;
         }
         function validate_description($input){
             if($input==null){
-                $erreur++;
                 return "Pas de description ?";
-            }else if (strlen($input)<20){
-                $erreur++;
+            }else if (strlen($input)<10){
                 return "Description plus longue svp";
+            }else if (strlen($input)>90){
+                return "Description trop longue ";
             }
             else return null;
         }
-        function validate_lieu($input){
-            return null;
-        }
-
         $options = array(
             'nom' => array(
                     'filter' => FILTER_CALLBACK, 
@@ -118,10 +113,6 @@ class Helpers{
                     'filter' => FILTER_CALLBACK, //Valider l'entier.
                     'options' => 'validate_description'
             ),
-            'lieux' => array(
-                    'filter' => FILTER_CALLBACK, 
-                    'options' => 'validate_lieux'
-            )
         );
         $resultat = filter_input_array(INPUT_POST, $options);
         $erreur = self::compte($resultat);
@@ -130,19 +121,18 @@ class Helpers{
         }
         else{
             return null;
-        }
-        
+        }   
     }
 
     public static function verifierLesParametresLieu(){
     $erreur=0;
     function validate_tag($input){
         if($input==null){
-            $erreur++;
             return "Pas de Tag !";
         }else if(strlen($input)<3){
-            $erreur++;
             return "Tag trop court !";
+        }else if(strlen($input)>25){
+            return "Tag trop long !";
         }
         else return null;
     }
@@ -164,35 +154,35 @@ class Helpers{
 
     public static function testInscription($dbh){
         try{
-                $u=Utilisateur::creerUnNouvelUtilisateur($dbh,$_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], 0,true);
-                if(is_array($u) && isset($u["error"])){
-                    return json_encode($u);
-                }else{
-                    return json_encode(array( "result"=>json_decode(json_encode($u)) ) );
-                }  
-            }catch(PDOException $e){
-                if($e->getCode()==23000){
-                    return json_encode(array(
-                    'error' => array(
-                        'identifiant' => "Identifiant déjà pris"
-                        )));
-                }else{
-                    return json_encode(array(
-                    'error' => array(
-                        'identifiant' => "Autre erreur BDD"
-                        )));
-                }
-            }catch(Exception $e){
-                echo json_encode(array(
-                    'error' => array(
-                        'nom' => $e->getCode()
-                        )));
+            $u=Utilisateur::creerUnNouvelUtilisateur($dbh,$_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], 0,true);
+            if(is_array($u) && isset($u["error"])){
+                return json_encode($u);
+            }else{
+                return json_encode(array( "result"=>json_decode(json_encode($u)) ) );
+            }  
+        }catch(PDOException $e){
+            if($e->getCode()==23000){
+                return json_encode(array(
+                'error' => array(
+                    'identifiant' => "Identifiant déjà pris"
+                    )));
+            }else{
+                return json_encode(array(
+                'error' => array(
+                    'identifiant' => "Autre erreur BDD"
+                    )));
             }
+        }catch(Exception $e){
+            echo json_encode(array(
+                'error' => array(
+                    'nom' => $e->getCode()
+                    )));
+        }
     }
 
      public static function testUpdate($dbh){
         try{
-                $u=Utilisateur::updateUtilisateur($dbh,$_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], 0,true);
+                $u=Utilisateur::updateUtilisateur($dbh,$_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"]);
                 if(is_array($u) && isset($u["error"])){
                     return json_encode($u);
                 }else{

@@ -147,8 +147,8 @@ function routeRequest()
                 echo Helpers::testInscription($dbh);
             }
             break;
-        case 'EditProfile':
-            if(!is_null($_SESSION["id"])){
+        case '/EditProfile':
+            if(!is_null($_SESSION["id"])&& $_SERVER['REQUEST_METHOD'] === 'POST'){
                 echo Helpers::testUpdate($dbh);
             } else echo 0; 
             break;
@@ -169,6 +169,7 @@ function routeRequest()
                     if(is_array($u) && isset($u["error"])){
                         echo json_encode($u);
                     }
+                    else{echo json_encode(array("result" => "success"));}
                 }
             }
             break;

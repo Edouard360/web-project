@@ -82,7 +82,7 @@ var Connexion = React.createClass({
 		              		<div className="col-sm-12 inscription">
 		                  		{this.state.connected?deconnexion:connexion}
 		              		</div>
-		              		<input value="PENIS" className="special small" type="button" onClick={()=>ReactDOM.render(<EditProfile connect={this.props.connect} user={this.props.user} />, document.getElementById('content2') )}/>
+		           
 
 		              		{(formbool)?form1:""}
 		              		{(formbool)?form2:""}

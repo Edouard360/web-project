@@ -7,11 +7,17 @@ var ObjetForm = React.createClass({
           <form onSubmit={this.soumettreObjet}>
               <div className="form-group">
               	<label >Nom</label>
-                <input className="form-control" type="text" id="nom" placeholder="nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
+                <input className="form-control" type="text" id="nom" placeholder="Nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
               </div>
               <div className="form-group">
               	<label >Description</label>
-                <input className="form-control" type="text" id="description" placeholder="description" value={this.state.description} onChange={this.handleChange} />{this.state.descriptionErr}
+                <input className="form-control" type="text" id="description" placeholder="Description" value={this.state.description} onChange={this.handleChange} />{this.state.descriptionErr}
+              </div>
+              <div className="text-form">
+              	<p><i className="fa fa-exclamation-triangle"></i>&nbsp; Si vous pensez savoir où a été perdu votre objet, 
+              	vous pouvez préciser autant de lieux que vous le souhaitez, tant qu'ils apparaissent dans la barre d'autocomplétion ! Si
+              	votre lieux n'apparait pas, s'il vous plait, référencez le d'abord dans la BDD dans l'onglet correspondant</p>
+              	<p>Utilisez les flèches du clavier pour séléctionner le lieu et appuyez sur TAB pour l'ajouter à la ligne</p>
               </div>
               <LieuAutobar data={this.props.data} lieux={this.state.lieux} add={this.add} />
               <hr />
@@ -54,12 +60,10 @@ var ObjetForm = React.createClass({
 			dataType: "json",
 			data: {nom: this.state.nom, description: this.state.description, lieux:this.state.lieux.map(function(props){return props.idl;})},
 			success: function(data) {
-				console.log(data);
 				if(data.error){
 					this.setState({nomErr: data.error.nom,descriptionErr: data.error.description});
 				}else{
-					console.log(data.result);
-					this.setState({nom:'', description:'',nomErr:'Bien soumis',descriptionErr:'OK'});
+					this.setState({nom:'', description:'',nomErr:'Bien Soumis',descriptionErr:'Bien Soumis'});
 				}
     		}.bind(this),
 		});

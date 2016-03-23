@@ -69,11 +69,18 @@ var App2 = React.createClass({
         break;     
     case "Docs":
         this.setState({Home:"",Lieux:"",Connexion:"",Docs:"active",Users:""});
+        ReactDOM.unmountComponentAtNode(document.getElementById('content2'));
+        ReactDOM.unmountComponentAtNode(document.getElementById('content3'));
         break;  
     case "Users":
         this.setState({Home:"",Lieux:"",Connexion:"",Docs:"",Users:"active"});
         ReactDOM.render( <ListeUtilisateur user={this.state.user} connect={this.connect} />, document.getElementById('content2') );
-        break;        
+        ReactDOM.unmountComponentAtNode(document.getElementById('content3'));
+        break;
+    case "EditProfile":
+        this.setState({Home:"",Lieux:"",Connexion:"active",Docs:"",Users:""});
+        ReactDOM.render( <EditProfile user={this.state.user} />, document.getElementById('content2') );
+        ReactDOM.unmountComponentAtNode(document.getElementById('content3'));        
     default:
     }    
   },
@@ -92,6 +99,16 @@ var App2 = React.createClass({
     
   },
   render:function(){
+    var dropdown = 
+      <li className="dropdown">
+        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{this.state.user.nom} &nbsp;<i className="fa fa-caret-square-o-down"></i> </a>
+          <ul className="dropdown-menu">
+            <li onClick={this.avoidReload} ><a href="#" id="EditProfile">Éditer le profil</a></li>
+            <li role="separator" className="divider"></li>
+            <li onClick={this.avoidReload}><a href="#" id="Connexion">Se Déconnecter</a></li>
+          </ul>
+      </li>
+    var connexion=<li role="presentation" onClick={this.avoidReload} className={this.state.Connexion} id="Connexion" ><a href="#" id="Connexion"  > Connexion</a></li>;
     return(
       <div>
         <nav className="navbar navbar-default navbar-fixed-top ">
@@ -106,7 +123,7 @@ var App2 = React.createClass({
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li role="presentation" onClick={this.avoidReload} className={this.state.Docs} id="Docs" ><a href="#" id="Docs"><i className="fa fa-book" id="Docs"></i>&nbsp; </a></li>
-              <li role="presentation" onClick={this.avoidReload} className={this.state.Connexion} id="Connexion" ><a href="#" id="Connexion"  >{this.state.user.nom?this.state.user.nom:"Connexion"} </a></li>
+              {this.state.user.nom?dropdown:connexion}
             </ul>
           </div>
         </nav>
