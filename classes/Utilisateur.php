@@ -45,7 +45,7 @@ class Utilisateur implements JsonSerializable{
     }
 
     public static function creerUnNouvelUtilisateur($dbh,$nom,$prenom,$identifiant,$mdp,$admin,$boolean){
-        if(is_array($u=Helpers::verifierLesParametresInscription())){
+       if(is_array( $u=Helpers::verifierLesParametresInscription() )){
             return(array("error"=>$u));
         } 
         $query = "INSERT INTO Utilisateur (nom,prenom,identifiant,mdp,admin) VALUES (?,?,?,?,?)";
@@ -56,7 +56,7 @@ class Utilisateur implements JsonSerializable{
             throw $e;
         }
         if($boolean)
-            return self::seConnecter($dbh,$identifiant,sha1($mdp."seldeprotection"));
+            return self::seConnecter($dbh,$identifiant,$mdp);
     }
 
     public static function initialiserLaSession($utilisateur){

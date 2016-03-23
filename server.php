@@ -138,37 +138,14 @@ function routeRequest()
         case '/Inscription':
             if($_SERVER['REQUEST_METHOD'] === 'GET'){
                 echo file_get_contents('./public/index.html');
-                echo '<script type="text/babel" src="scripts/Connexion-Inscription/Inscription.js"></script>';
+                echo '<script type="text/babel">'.
+                file_get_contents('./public/scripts/Connexion-Inscription/Inscription.js').
+                file_get_contents('./public/scripts/App/Inscription.js').
+                '</script>';                  
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                try{
-                    $u=Utilisateur::creerUnNouvelUtilisateur($dbh,$_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], 0,true);
-                    if(is_array($u) && isset($u["error"])){
-                        echo json_encode($u);
-                    }else{
-                        echo json_encode(array( "result"=>json_decode(json_encode($u)) ) );
-                    }  
-                }catch(PDOException $e){
-                    if($e->getCode()==23000){
-                        echo json_encode(array(
-                        'error' => array(
-                            'identifiantErr' => "Identifiant déjà pris"
-                            )));
-                    }else{
-                        echo json_encode(array(
-                        'error' => array(
-                            'identifiantErr' => $e->getMessage()
-                            )));
-                    }
-                }catch(Exception $e){
-                    echo json_encode(array(
-                        'error' => array(
-                            'nom' => $e->getCode()
-                            )));
-                }
+                echo Helpers::testInscription($dbh);
             }
             break;
-
-
         case '/ChargerLesObjets':
             if($_SERVER['REQUEST_METHOD'] === 'GET') {
                 header('Content-Type: application/json');
@@ -253,7 +230,7 @@ function routeRequest()
                 if(is_null($u)){
                     header('Location: /Connexion');
                 }else{
-                    $u->detruireUtilisateur($_POST["idu"]);
+                    $u->detruireUtilisateur($dbh, $_POST["idu"]);
                 }             
             }
             break;

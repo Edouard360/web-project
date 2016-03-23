@@ -66,8 +66,9 @@ var Inscription = React.createClass({
 					console.log(data.error);
 					this.setState({nomErr: data.error.nom,prenomErr: data.error.prenom,identifiantErr: data.error.identifiant,motdepasseErr: data.error.motdepasse});
 				}else{
-					console.log(data.result);
 					this.setState({nomErr:'',prenomErr:'',identifiantErr:'',motdepasseErr:''});
+					ReactDOM.render(<App2 active="Connexion" user={data.result} />,document.getElementById('content1'));
+					ReactDOM.render(<InscriptionValide user={data.result} />,document.getElementById('content2'));	
 				}
     		}.bind(this),
     		error: function(xhr, status, err) {
@@ -78,6 +79,27 @@ var Inscription = React.createClass({
 		});
 	},
 });
+
+
+var InscriptionValide = React.createClass({
+	render:function(){
+		var form = 
+		<section id="three" className="wrapper style3 special">
+        <div className="container">
+          <header className="major">
+            <h2 >INSCRIPTION VALIDÉE</h2>
+            <p> Votre inscription a bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
+            <i className="fa fa-cog fa-spin fa-5x"></i>
+          </header>
+           <p> Votre inscription a bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
+
+
+        </div>
+      </section>
+		return form;
+	}
+});
+
 
 /*
 

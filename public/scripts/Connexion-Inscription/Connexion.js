@@ -62,7 +62,7 @@ var Connexion = React.createClass({
 		                <input value="Connexion" className="special small" type="submit"/>
 		            </div>
 		var lien = 	<div className="col-sm-12 inscription">
-						<input value="Inscription" className="special small" type="button" onClick={()=>ReactDOM.render(<Inscription connect={this.props.connect} />, document.getElementById('content2') )}/>
+						<input value="Inscription" className="special small" type="button" onClick={()=>ReactDOM.render(<Inscription connect={this.props.connect} user={this.props.user} />, document.getElementById('content2') )}/>
 		            </div>		
 		var formbool = !this.state.connected && this.state.toggle;
 		var lienbool = !this.state.connected && !this.state.toggle;
@@ -72,7 +72,8 @@ var Connexion = React.createClass({
 			<section id="three" className="wrapper style3 special">
 				<div className="container">
           			<header className="major">
-            		<h2 >CONNEXION</h2>
+          			<h2 >CONNEXION</h2>
+          			<i className="fa fa-refresh fa-3x"></i>
           			</header>
         		</div>	
 				<div className="container 25%">

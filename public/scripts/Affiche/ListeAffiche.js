@@ -17,7 +17,7 @@ var ListeAffiche = React.createClass({
           newprops["lieux"]=props.lieux?props.lieux.split(","):"";
           newprops["lostBy"]={idu:props.lostByidu,nom:props.lostBynom,prenom:props.lostByprenom,identifiant:props.lostByidentifiant,admin:props.lostByadmin};
           newprops["foundBy"]={idu:props.foundByidu,nom:props.foundBynom,prenom:props.foundByprenom,identifiant:props.foundByidentifiant,admin:props.foundByadmin};
-          newprops["objet"]={ido:props.ido,nom:props.nom, description:props.description};
+          newprops["objet"]={ido:props.ido,nom:props.nom, description:props.description, hour:props.hour, day:props.day};
            //console.log(newprops);
            return newprops;
          });

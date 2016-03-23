@@ -1,57 +1,53 @@
 <?php
 
 class Helpers{
+   public static function compte($array){
+        $nbrErreurs=0;
+        foreach($array as $cle => $valeur) {
+            if(!is_null($valeur)) 
+                $nbrErreurs++;
+        }
+        return $nbrErreurs;
+    }
 
     public static function verifierLesParametresInscription(){
-        $erreur=0;
         function validate_nom($input){
             if($input==null){
-                $erreur++;
                 return "Vous n'avez pas rentré de Nom !";
             }else if(strlen($input)<3){
-                $erreur++;
                 return "Votre nom est trop court";
             }
             else return null;
         }
         function validate_prenom($input){
             if($input==null){
-                $erreur++;
                 return "Vous n'avez pas rentré de Prénom !";
             }else if(strlen($input)<3){
-                $erreur++;
                 return "Votre prénom est trop court";
             }
             else if (strlen($input)>10){
-                $erreur++;
                 return "Nom trop long";
             }
             else return null;
         }
         function validate_identifiant($input){
             if($input==null){
-                $erreur++;
                 return "Vous n'avez pas rentré d'Identifiant !";
             }else if(strlen($input)<3){
-                $erreur++;
                 return "Nom trop court";
             }
             else if (strlen($input)>10){
-                $erreur++;
                 return "Nom trop long";
             }
             else return null;
         }
         function validate_motdepasse($input){
             if($input==null){
-                $erreur++;
                 return "Vous n'avez pas rentré de Mot De Passe!";
             }if(strlen($input)<5){
-                $erreur++;
                 return "Mot de passe trop court";
             }
             else if (strlen($input)>10){
-                $erreur++;
                 return "Mot de passe trop long";
             }
             else return null;
@@ -76,9 +72,11 @@ class Helpers{
             )
         );
         $resultat = filter_input_array(INPUT_POST, $options);
+        $erreur = self::compte($resultat);
         if($erreur>0){
             return $resultat;
-        }else{
+        }
+        else{
             return null;
         }
         
@@ -126,9 +124,11 @@ class Helpers{
             )
         );
         $resultat = filter_input_array(INPUT_POST, $options);
+        $erreur = self::compte($resultat);
         if($erreur>0){
             return $resultat;
-        }else{
+        }
+        else{
             return null;
         }
         
@@ -153,13 +153,43 @@ class Helpers{
             )
         );
         $resultat = filter_input_array(INPUT_POST, $options);
+        $erreur = self::compte($resultat);
         if($erreur>0){
             return $resultat;
-        }else{
+        }
+        else{
             return null;
         }
-    
+        
     }
+
+        public static function testInscription($dbh){
+            try{
+                    $u=Utilisateur::creerUnNouvelUtilisateur($dbh,$_POST["nom"],$_POST["prenom"],$_POST["identifiant"],$_POST["motdepasse"], 0,true);
+                    if(is_array($u) && isset($u["error"])){
+                        return json_encode($u);
+                    }else{
+                        return json_encode(array( "result"=>json_decode(json_encode($u)) ) );
+                    }  
+                }catch(PDOException $e){
+                    if($e->getCode()==23000){
+                        return json_encode(array(
+                        'error' => array(
+                            'identifiant' => "Identifiant déjà pris"
+                            )));
+                    }else{
+                        return json_encode(array(
+                        'error' => array(
+                            'identifiant' => "Autre erreur BDD"
+                            )));
+                    }
+                }catch(Exception $e){
+                    echo json_encode(array(
+                        'error' => array(
+                            'nom' => $e->getCode()
+                            )));
+                }
+        }
 
 
 

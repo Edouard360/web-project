@@ -7,6 +7,8 @@ var Objet = React.createClass({
           DESCRIPTION : {this.props.description}
         </h6>
         {this.props.lieux}
+        {this.props.hour} <br/>
+        {this.props.day}
       </div>
       )
   }

@@ -10,6 +10,12 @@ var App2 = React.createClass({
       user:{}
     }
   },
+  componentDidMount:function(){
+    console.log(this.props.user);
+  },
+  componentWillReceiveProps:function(nextProps){
+    this.setState({user:nextProps.user});
+  },
   componentWillMount:function(){
     this.loadFromServer1();
   },

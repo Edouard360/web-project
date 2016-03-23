@@ -12,7 +12,6 @@ var ListeUtilisateur = React.createClass({
       type: "get",
       dataType: 'json',
       success: function(data) {
-        console.log(data);
         this.setState({utilisateur :data});
       }.bind(this)
     });
