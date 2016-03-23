@@ -59,6 +59,23 @@ class Utilisateur implements JsonSerializable{
             return self::seConnecter($dbh,$identifiant,$mdp);
     }
 
+    public static function updateUtilisateur($dbh,$nom,$prenom,$identifiant,$mdp,$admin,$boolean){
+       if(is_array( $u=Helpers::verifierLesParametresInscription() )){
+            return(array("error"=>$u));
+        } 
+        $query = "UPDATE Utilisateur SET nom=(?),prenom=(?),identifiant=(?),mdp=(?) WHERE idu=(?)";
+        $sth = $dbh->prepare($query);
+        try{
+            $sth->execute(array($nom,$prenom,$identifiant,sha1($mdp."seldeprotection"),$_SESSION['id']);
+        }catch(PDOException $e){
+            throw $e;
+        }
+        if($boolean)
+            return self::seConnecter($dbh,$identifiant,$mdp);
+    }
+
+    
+
     public static function initialiserLaSession($utilisateur){
         $_SESSION['id'] = $utilisateur->idu;
     }

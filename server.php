@@ -89,6 +89,7 @@ function routeRequest()
             echo '<script type="text/babel">'.
             file_get_contents('./public/scripts/Connexion-Inscription/Connexion.js').
             file_get_contents('./public/scripts/Connexion-Inscription/Inscription.js').
+            file_get_contents('./public/scripts/Connexion-Inscription/EditProfile.js').
             file_get_contents('./public/scripts/Affiche/Autobar/Autobar.js').
             file_get_contents('./public/scripts/Affiche/Autobar/LieuAutobar.js').
             file_get_contents('./public/scripts/Lieu/Lieu.js').
@@ -145,6 +146,11 @@ function routeRequest()
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 echo Helpers::testInscription($dbh);
             }
+            break;
+        case 'EditProfile':
+            if(!is_null($_SESSION["id"])){
+                echo Helpers::testUpdate($dbh);
+            } else echo 0; 
             break;
         case '/ChargerLesObjets':
             if($_SERVER['REQUEST_METHOD'] === 'GET') {
