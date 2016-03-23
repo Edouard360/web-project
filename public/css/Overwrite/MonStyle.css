@@ -27,9 +27,9 @@
 
 .container.form{
 			margin-bottom: 50px;
-			background-color: white;
+			background-color: rgb(255, 255, 255);
 			border-radius: 5px;
-			border: solid 2px #3CADD4;
+			border: solid 2px #000000;
 			padding-left: 15%;
 			padding-right: 15%;
 			padding-top: 20px;

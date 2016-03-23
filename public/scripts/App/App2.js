@@ -21,19 +21,25 @@ var App2 = React.createClass({
       success: function(data) {
         if(data.result){
           this.setState({user:data.result}); 
-          this.loadFromServer2();
         }
+        this.loadFromServer2();
         }.bind(this),
       });     
   },
-  loadFromServer2:function(){
+  loadFromServer2:function(boolean){
     $.ajax({
       url: "/ChargerLesLieux",
       type: "get",
       dataType: 'json',
       success: function(data) {
         this.setState({lieux :data});
-        this.switch(this.props.active);
+        console.log(boolean);
+        if(boolean){
+          this.switch("Lieux");
+        }
+        else{
+          this.switch(this.props.active);
+        } 
       }.bind(this)
       });
   },
@@ -46,8 +52,8 @@ var App2 = React.createClass({
         break;
     case "Lieux":
         this.setState({Home:"",Lieux:"active",Connexion:"",Docs:"",Users:""});
-        ReactDOM.render( <ListeLieu user={this.state.user} />, document.getElementById('content2') );
-        ReactDOM.render( <NavbarLieu user={this.state.user}/>, document.getElementById('content3') );
+        ReactDOM.render( <ListeLieu user={this.state.user} load={this.loadFromServer2} lieux={this.state.lieux}/>, document.getElementById('content2') );
+        ReactDOM.render( <NavbarLieu user={this.state.user} lieux={this.state.lieux}/>, document.getElementById('content3') );
         break;
     case "Connexion":
         this.setState({Home:"",Lieux:"",Connexion:"active",Docs:"",Users:""});

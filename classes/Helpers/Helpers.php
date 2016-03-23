@@ -76,7 +76,12 @@ class Helpers{
             )
         );
         $resultat = filter_input_array(INPUT_POST, $options);
-        return $resultat;
+        if($erreur>0){
+            return $resultat;
+        }else{
+            return null;
+        }
+        
         
     }
 
@@ -121,7 +126,11 @@ class Helpers{
             )
         );
         $resultat = filter_input_array(INPUT_POST, $options);
-        return $resultat;
+        if($erreur>0){
+            return $resultat;
+        }else{
+            return null;
+        }
         
     }
 
@@ -144,8 +153,12 @@ class Helpers{
             )
         );
         $resultat = filter_input_array(INPUT_POST, $options);
-        return $resultat;
-        
+        if($erreur>0){
+            return $resultat;
+        }else{
+            return null;
+        }
+    
     }
 
 

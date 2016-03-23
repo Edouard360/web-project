@@ -8,7 +8,7 @@ class Lieu{
     public static function ajouterUnLieu($dbh,$tag,$lat,$lng){
         if(is_array($u = Helpers::verifierLesParametresLieu())){
             return(array("error"=>$u));
-        } 
+        }
         $query = ($lat==null)?"INSERT INTO Lieu (tag) VALUES (?)":"INSERT INTO Lieu (tag,lat,lng) VALUES (?,?,?)";
         $sth = $dbh->prepare($query);
         if($lat==null){

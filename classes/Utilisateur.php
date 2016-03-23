@@ -45,7 +45,7 @@ class Utilisateur implements JsonSerializable{
     }
 
     public static function creerUnNouvelUtilisateur($dbh,$nom,$prenom,$identifiant,$mdp,$admin,$boolean){
-        if(is_array($u=Helpers::verifierLesParametresInscription($nom,$prenom,$identifiant,$mdp))){
+        if(is_array($u=Helpers::verifierLesParametresInscription())){
             return(array("error"=>$u));
         } 
         $query = "INSERT INTO Utilisateur (nom,prenom,identifiant,mdp,admin) VALUES (?,?,?,?,?)";
@@ -83,21 +83,30 @@ class Utilisateur implements JsonSerializable{
     }
 
     public function detruireUtilisateur($dbh,$idu){
+        if($this->admin != 1){return "error";}
         $query = "DELETE FROM Utilisateur WHERE idu=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($idu));
     }
 
     public function supprimerUnObjet($dbh,$ido){
-        $query = "DELETE FROM Objet WHERE ido=?";
+        if($this->admin == 1){
+            //Si l'utilisateur est admin, il peut supprimer l'objet
+            $query = "DELETE FROM Objet WHERE ido=?";
+            $sth = $dbh->prepare($query);
+            $sth->execute(array($ido));
+        }
+        //Sinon on effectue une requête croisée pour verifier que l'objet
+        //Appartient bien à l'utilisateur
+        $query = "DELETE FROM Objet WHERE ido=? AND lostBy=?";
         $sth = $dbh->prepare($query);
-        $sth->execute(array($ido));
+        $sth->execute(array($ido,$this->idu));
     }
 
     public function ajouterUnObjet($dbh,$nom,$description,$lieux){
-        if(is_array($u=Helpers::verifierLesParametresObjet($nom,$prenom,$identifiant,$mdp))){
+        if(is_array($u=Helpers::verifierLesParametresObjet())){
             return(array("error"=>$u));
-        } 
+        }
         $query = "INSERT INTO Objet (lostBy,nom,description) VALUES (?,?,?)";
         $sth = $dbh->prepare($query);
         $sth->execute(array($this->idu,$nom,$description));
@@ -113,6 +122,8 @@ class Utilisateur implements JsonSerializable{
     }
 
     public function declarerAvoirTrouveUnObjet($dbh,$ido){
+        //On effectue une requête croisée pour s'assurer 
+        //qu'un utilisateur ne déclare qu'un objet non déclaré
         $query = "UPDATE Objet SET foundBy=? WHERE ido=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($this->idu,$ido));

@@ -224,7 +224,8 @@ function routeRequest()
                 $u=Lieu::ajouterUnLieu($dbh, $_POST["tag"], $_POST["lat"], $_POST["lng"]);
                 if(is_array($u) && isset($u["error"])){
                         echo json_encode($u);
-                    }   
+                    }
+                else echo json_encode(array("e" => "v"));
             }
             break;
         case '/SupprimerUnLieu':
@@ -299,15 +300,15 @@ function routeRequest()
                 return null;
         }
         $options = array(
-                            'nom' => array(
-                                    'filter' => FILTER_CALLBACK, 
-                                    'options' => 'validate_nom'
-                            ),
-                            'description' => array(
-                                    'filter' => FILTER_CALLBACK, //Valider l'entier.
-                                    'options' => 'validate_description'
-                            )
-                        );
+            'nom' => array(
+                    'filter' => FILTER_CALLBACK, 
+                    'options' => 'validate_nom'
+            ),
+            'description' => array(
+                    'filter' => FILTER_CALLBACK, //Valider l'entier.
+                    'options' => 'validate_description'
+            )
+        );
         $resultat = filter_input_array(INPUT_POST, $options);
 
           

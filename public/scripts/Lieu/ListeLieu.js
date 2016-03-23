@@ -1,31 +1,7 @@
 var ListeLieu = React.createClass({
 	getInitialState: function() {
-    	return {lieux: [],value:""};
+    	return {value:""};
   	},
-  	componentDidMount: function() {
-   		this.loadFromServer();
- 	},
- 	loadFromServer: function(){
-  	$.ajax({
-    	url: "/ChargerLesLieux",
-    	type: "get",
-    	dataType: 'json',
-    	success: function(data) {
-      		this.setState({lieux :data});
-    	}.bind(this)
-  	});
-     $.ajax({
-      url: "/Connexion",
-      type: "put",
-      dataType: "json",
-      success: function(data) {
-        if(data.result){
-          this.setState({user:data.result});
-          console.log(data.result);
-        }
-        }.bind(this),
-      }); 
-  },
 	handleChange:function(value){
   		this.setState({value:value});
 	},
@@ -35,17 +11,16 @@ var ListeLieu = React.createClass({
         type: "post",
         data: {idl:idl},
         success: function() {
-          this.loadFromServer();
+          this.props.load("special");
         }.bind(this),
         error:function(){
           //console.log(1);
         }
       });
-
   	},
 	filtre:function(props){ return(props.tag.toLowerCase().indexOf(this.state.value) !== -1) },
 	render:function(){
-		var lieux = this.state.lieux.filter(this.filtre).map(function(props) {
+		var lieux = this.props.lieux.filter(this.filtre).map(function(props) {
 			return (
      		<Lieu canDelete={parseInt(this.props.user.admin)===1} key={props.idl} {...props} handleDelete={this.handleDelete}> 
         	//après on rajoute le send message.
