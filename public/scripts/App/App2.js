@@ -59,7 +59,7 @@ var App2 = React.createClass({
     case "Lieux":
         this.setState({Home:"",Lieux:"active",Connexion:"",Docs:"",Users:""});
         ReactDOM.render( <ListeLieu user={this.state.user} load={this.loadFromServer2} lieux={this.state.lieux}/>, document.getElementById('content2') );
-        ReactDOM.render( <NavbarLieu user={this.state.user} lieux={this.state.lieux}/>, document.getElementById('content3') );
+        ReactDOM.render( <NavbarLieu user={this.state.user} lieux={this.state.lieux} reload={this.loadFromServer2}/>, document.getElementById('content3') );
         break;
     case "Connexion":
         this.setState({Home:"",Lieux:"",Connexion:"active",Docs:"",Users:""});

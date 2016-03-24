@@ -77,6 +77,7 @@
 
 .style22{
 	min-height:1200px;
+	background-color: whitesmoke;
 }
 
 
@@ -100,6 +101,6 @@ form.navbar-form.navbar-left.navbar-fixed-top.special-fix > ul {}
 
 .text-form{
 	font-size: 12px;
-	line-height: 3;
+	line-height: 1.9;
 	text-align: left;
 }

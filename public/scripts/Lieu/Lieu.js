@@ -4,8 +4,7 @@ var Lieu = React.createClass({
     var supprimer = <button className="button small lieu" onClick={this.handleDelete}><i className="fa fa-trash-o"></i>&nbsp; Supprimer</button>
     return(
       <div className="container affiche">
-        {this.props.tag}
-        {this.props.idl}
+        {this.props.tag.toUpperCase()}
         {this.props.lat?map:""}
         <div>
          {this.props.canDelete?supprimer:""}

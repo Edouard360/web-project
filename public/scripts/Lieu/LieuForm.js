@@ -59,6 +59,7 @@ var LieuForm = React.createClass({
 				}else{
 					console.log(data);
 					this.setState({tag:'',tagErr:'Bien soumis'});
+					this.props.reload(true);
 				}
     		}.bind(this),
     		error: function(xhr, status, err) {

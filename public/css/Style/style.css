@@ -6,7 +6,7 @@
 /* Basic */
 
 	body {
-		background: #fff;
+		background: #F5F5F5;
 	}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -916,7 +916,7 @@
 		input[type="button"].special,
 		.button.special {
 			background-color: #103EB9;
-			color: #ffffff !important;
+			color: #F5F5F5 !important;
 		}
 
 			input[type="submit"].special:hover,
@@ -1105,7 +1105,6 @@
 
 		.wrapper.style1 {
 			background-color: #F5F5F5;
-			border-bottom: 1px solid rgba(144, 144, 144, 0.25);
 			border-top: 1px solid rgba(144, 144, 144, 0.25);
 		}
 
@@ -1153,7 +1152,7 @@
 			}
 
 		.wrapper.style3 {
-			background-color: #FFFFFF;
+			background-color: #F5F5F5;
 			color: #000000;
 		}
 

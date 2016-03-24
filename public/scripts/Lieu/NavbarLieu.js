@@ -2,7 +2,7 @@ var NavbarLieu = React.createClass({
   switch:function(active){
     switch(active) {
     case "LieuForm":
-        ReactDOM.render( <LieuForm user={this.props.user} />, document.getElementById('content2') );
+        ReactDOM.render( <LieuForm user={this.props.user} reload={this.props.reload}/>, document.getElementById('content2') );
         break;
     case "ListeLieu":
         ReactDOM.render( <ListeLieu user={this.props.user} lieux={this.props.lieux} />, document.getElementById('content2') );

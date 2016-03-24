@@ -1,6 +1,6 @@
 var ListeAffiche = React.createClass({
   getInitialState: function() {
-    return {objets: [], value:""};
+    return {objets: [], value:"",mode:true};
   },
   componentDidMount: function() {
    this.loadFromServer();
@@ -70,10 +70,13 @@ var ListeAffiche = React.createClass({
       this.setState({value:value});
       //console.log(this.state.entier);
     },
+    handleClick:function(){
+      this.setState({mode:!this.state.mode});
+    },
     render: function() {
       var objets = this.state.objets.filter(this.filtre).map(function(props) {
         return (
-         <Affiche {...props} user={this.props.user} key={props.objet.ido} handleDelete={this.handleDelete} handleDeclare={this.handleDeclare} handleUndeclare={this.handleUndeclare}> 
+         <Affiche {...props} user={this.props.user} key={props.objet.ido} handleDelete={this.handleDelete} handleDeclare={this.handleDeclare} handleUndeclare={this.handleUndeclare} mode={this.state.mode}> 
             	//après on rajoute le send message.
             	</Affiche>
               );
@@ -83,12 +86,12 @@ var ListeAffiche = React.createClass({
           <header className="major">
             <h2>OBJETS PERDUS</h2>
             <p>Vous pouvez consulter la liste d'Objets</p>
+            <p onClick={this.handleClick}><i className="fa fa-exchange"></i>&nbsp; AFFICHAGE </p>
           </header>
           <div className="container filtre">
-          Filtrer les Objets par Nom
-        <FilterBar value={this.state.value} handleChange={this.handleChange} />
-        </div>
-        <div className="listeaffiches">
+            <FilterBar value={this.state.value} handleChange={this.handleChange} />
+          </div>
+        <div>
           {objets}
         </div>
         
