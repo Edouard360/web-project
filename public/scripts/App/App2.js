@@ -21,7 +21,7 @@ var App2 = React.createClass({
   },
   loadFromServer1:function(){
     $.ajax({
-      url: "/Connexion",
+      url: "/MODAL/Connexion",
       type: "put",
       dataType: "json",
       success: function(data) {
@@ -34,7 +34,7 @@ var App2 = React.createClass({
   },
   loadFromServer2:function(boolean){
     $.ajax({
-      url: "/ChargerLesLieux",
+      url: "/MODAL/ChargerLesLieux",
       type: "get",
       dataType: 'json',
       success: function(data) {

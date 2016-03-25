@@ -32,7 +32,7 @@ var BlocMessage = React.createClass({
   },
   chargerLesMessages:function(){
     $.ajax({
-      url: "/ChargerLesMessagesDestinataire",
+      url: "/MODAL/ChargerLesMessagesDestinataire",
       type: "get",
       dataType: 'json',
       success: function(data) {

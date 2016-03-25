@@ -9,7 +9,7 @@ var EcrireUnMessage = React.createClass({
   handleSubmit:function(e){
 		e.preventDefault();
 		$.ajax({
-			url: "/EcrireUnMessage",
+			url: "/MODAL/EcrireUnMessage",
 			type: "post",
 			data: {message: $('#message').val()},
 			success: function() {

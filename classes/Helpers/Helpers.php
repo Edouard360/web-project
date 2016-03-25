@@ -125,31 +125,31 @@ class Helpers{
     }
 
     public static function verifierLesParametresLieu(){
-    $erreur=0;
-    function validate_tag($input){
-        if($input==null){
-            return "Pas de Tag !";
-        }else if(strlen($input)<3){
-            return "Tag trop court !";
-        }else if(strlen($input)>25){
-            return "Tag trop long !";
+        $erreur=0;
+        function validate_tag($input){
+            if($input==null){
+                return "Pas de Tag !";
+            }else if(strlen($input)<3){
+                return "Tag trop court !";
+            }else if(strlen($input)>25){
+                return "Tag trop long !";
+            }
+            else return null;
         }
-        else return null;
-    }
-    $options = array(
-        'tag' => array(
-                'filter' => FILTER_CALLBACK, 
-                'options' => 'validate_tag'
-        )
-    );
-    $resultat = filter_input_array(INPUT_POST, $options);
-    $erreur = self::compte($resultat);
-    if($erreur>0){
-        return $resultat;
-    }
-    else{
-        return null;
-    }  
+        $options = array(
+            'tag' => array(
+                    'filter' => FILTER_CALLBACK, 
+                    'options' => 'validate_tag'
+            )
+        );
+        $resultat = filter_input_array(INPUT_POST, $options);
+        $erreur = self::compte($resultat);
+        if($erreur>0){
+            return $resultat;
+        }
+        else{
+            return null;
+        }  
     }
 
     public static function testInscription($dbh){

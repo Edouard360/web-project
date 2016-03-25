@@ -1,6 +1,5 @@
 <IfModule mod_rewrite.c>
     Options -MultiViews
-
     RewriteEngine On
     RewriteBase /MODAL/
     RewriteCond %{REQUEST_FILENAME} !-f

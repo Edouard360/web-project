@@ -2,11 +2,6 @@
 session_name("ProjetModal2016HugoetEdouard");
 session_start();
 
-if (!isset($_SESSION['initiated'])) {
-        session_regenerate_id();
-        $_SESSION['initiated'] = true;
-    }
-
 
 require("./classes/Database.php");
 require("./classes/Helpers/Helpers.php");
@@ -68,7 +63,7 @@ function routeRequest()
     //'HTTP_REFERER'
     //Changement de mot de passe stocker l'heure en SESSION er en hidden verifiez que le delta ne depasse pas une certaine limite
     //https://www.owasp.org
-    $uri = $_SERVER['REQUEST_URI'];
+    $uri = substr($_SERVER['REQUEST_URI'],6);
     $dbh = Database::connect();
 
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
@@ -77,8 +72,6 @@ function routeRequest()
     session_destroy();   // destroy session data in storage
     }
     $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
-
-
 
 
     switch($uri){
@@ -302,4 +295,9 @@ function routeRequest()
         default:
             return false;
     }
+
+
+
+
+
 }
