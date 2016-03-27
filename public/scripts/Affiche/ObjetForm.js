@@ -60,7 +60,7 @@ var ObjetForm = React.createClass({
 	soumettreObjet:function(e){
 		e.preventDefault();
 		$.ajax({
-			url: "/MODAL/AjouterUnObjet",
+			url: "./AjouterUnObjet",
 			type: "post",
 			dataType: "json",
 			data: {nom: this.state.nom, description: this.state.description, lieux:this.state.lieux.map(function(props){return props.idl;})},

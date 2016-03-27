@@ -48,7 +48,7 @@ var LieuForm = React.createClass({
 		e.preventDefault();
 		console.log(e.target);
 		$.ajax({
-			url: "/MODAL/AjouterUnLieu",
+			url: "./AjouterUnLieu",
 			type: "post",
 			dataType: "json",
 			data: {tag: this.state.tag, lat:this.state.latitude, lng:this.state.longitude},

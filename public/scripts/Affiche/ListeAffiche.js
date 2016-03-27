@@ -8,7 +8,7 @@ var ListeAffiche = React.createClass({
   loadFromServer: function(){
   // --- TRES IMPORTANT ON REFORMATTE LES DONNEES !! --- //
     $.ajax({
-      url: "/MODAL/ChargerLesObjets",
+      url: "./ChargerLesObjets",
       type: "get",
       dataType: 'json',
       success: function(data) {
@@ -26,7 +26,7 @@ var ListeAffiche = React.createClass({
   },
   handleDelete:function(ido){
     $.ajax({
-      url: "/MODAL/SupprimerUnObjet",
+      url: "./SupprimerUnObjet",
       type: "post",
       data: {ido:ido},
       success: function() {
@@ -39,7 +39,7 @@ var ListeAffiche = React.createClass({
   },
   handleDeclare:function(ido){
     $.ajax({
-      url: "/MODAL/DeclarerAvoirTrouveUnObjet",
+      url: "./DeclarerAvoirTrouveUnObjet",
       type: "post",
       data:{ido:ido},
       success: function() {
@@ -50,7 +50,7 @@ var ListeAffiche = React.createClass({
   },
   handleUndeclare:function(ido){
     $.ajax({
-      url: "/MODAL/RetirerDeclaration",
+      url: "./RetirerDeclaration",
       type: "post",
       data:{ido:ido},
       success: function() {

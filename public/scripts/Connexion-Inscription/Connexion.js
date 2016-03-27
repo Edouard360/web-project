@@ -14,7 +14,7 @@ var Connexion = React.createClass({
 	connexion:function(e){
 		e.preventDefault();
 		$.ajax({
-			url: "/MODAL/Connexion",
+			url: "./Connexion",
 			type: "post",
 			data: {identifiant: $('#identifiant').val(), motdepasse: $('#motdepasse').val()},
 			dataType: "json",
@@ -34,7 +34,7 @@ var Connexion = React.createClass({
 	},
 	deconnexion:function(){
 		$.ajax({
-			url: "/MODAL/Deconnexion",
+			url: "./Deconnexion",
 			type: "post",
 			success: function() {
 				console.log("Deconnexion effective");

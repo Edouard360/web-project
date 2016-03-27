@@ -8,7 +8,7 @@ var ListeMessage = React.createClass({
   },
   loadFromServer: function(){
     $.ajax({
-      url: "/ChargerLesMessagesEmetteur",
+      url: "./ChargerLesMessagesEmetteur",
       type: "get",
       dataType: 'json',
       success: function(data) {
@@ -27,7 +27,7 @@ var ListeMessage = React.createClass({
   },
   handleDetruire: function(idu){
     $.ajax({
-      url: "/DetruireUtilisateur",
+      url: "./DetruireUtilisateur",
       type: "post",
       data: {idu:idu},
       success: function(data) {

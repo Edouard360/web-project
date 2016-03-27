@@ -59,7 +59,7 @@ var EditProfile = React.createClass({
 	profile:function(e){
 		e.preventDefault();
 		$.ajax({
-			url: "/MODAL/EditProfile",
+			url: "./EditProfile",
 			type: "post",
 			dataType: "json",
 			data: {nom: $('#nom').val(), prenom: $('#prenom').val(), identifiant: $('#identifiant').val(),motdepasse: $('#motdepasse').val()},

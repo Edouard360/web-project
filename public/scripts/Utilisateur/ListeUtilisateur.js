@@ -33,7 +33,7 @@ var ListeUtilisateur = React.createClass({
   },
   loadFromServer: function(){
     $.ajax({
-      url: "/MODAL/ChargerLesUtilisateurs",
+      url: "./ChargerLesUtilisateurs",
       type: "get",
       dataType: 'json',
       success: function(data) {
@@ -44,7 +44,7 @@ var ListeUtilisateur = React.createClass({
 
   handleDetruire: function(idu){
     $.ajax({
-      url: "/MODAL/DetruireUtilisateur",
+      url: "./DetruireUtilisateur",
       type: "post",
       data: {idu:idu},
       success: function(data) {
@@ -54,7 +54,7 @@ var ListeUtilisateur = React.createClass({
   },
   rendreAdmin:function(idu){
     $.ajax({
-      url: "/MODAL/RendreAdmin",
+      url: "./RendreAdmin",
       type: "post",
       data: {idu:idu},
       success: function(data) {

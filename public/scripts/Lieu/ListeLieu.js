@@ -7,7 +7,7 @@ var ListeLieu = React.createClass({
 	},
 	handleDelete: function(idl){
 		$.ajax({
-        url: "/MODAL/SupprimerUnLieu",
+        url: "./SupprimerUnLieu",
         type: "post",
         data: {idl:idl},
         success: function() {

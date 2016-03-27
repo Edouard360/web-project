@@ -57,7 +57,7 @@ var Inscription = React.createClass({
 	inscription:function(e){
 		e.preventDefault();
 		$.ajax({
-			url: "/MODAL/Inscription",
+			url: "./Inscription",
 			type: "post",
 			dataType: "json",
 			data: {nom: $('#nom').val(), prenom: $('#prenom').val(), identifiant: $('#identifiant').val(),motdepasse: $('#motdepasse').val()},
