@@ -2,12 +2,12 @@ var SousListeAutocomplete = React.createClass({
   render:function(){
     var lieux = this.props.isOpen && this.props.data.map(function(props,id) {
       return (
-        <LigneLieu key={id} id={id} {...props} bold={this.props.highlightedIndex==id?true:false} Mouse={this.props.Mouse} /> 
+        <LigneLieu key={id} id={id} {...props} bold={this.props.highlightedIndex==id?true:false} Mouse={this.props.Mouse} Click={this.props.Click} /> 
         )
     }.bind(this));
     return(
       <div>
-      <table className="table">
+      <table className="table" onMouseLeave={this.props.MouseLeave}>
       <thead></thead>
       <tbody>
       {lieux}
@@ -116,6 +116,14 @@ var Autobar = React.createClass({
   Mouse:function(id){
     this.setState({highlightedIndex: id});
   },
+  MouseLeave:function(){
+    this.setState({highlightedIndex: null});
+  },
+  Click:function(id){
+    console.log(11);
+    var lieu=this.state.datalist[id];
+    if(lieu){this.add(lieu);}
+  },
   render: function(){
     return(
       <div>
@@ -126,7 +134,7 @@ var Autobar = React.createClass({
       type="text" 
       onChange={this.handleChange}
       onKeyDown={this.handleKeyDown} />
-      <SousListeAutocomplete data={this.state.datalist} highlightedIndex={this.state.highlightedIndex} isOpen={this.state.isOpen} Mouse={this.Mouse} />
+      <SousListeAutocomplete data={this.state.datalist} highlightedIndex={this.state.highlightedIndex} isOpen={this.state.isOpen} Mouse={this.Mouse} Click={this.Click} MouseLeave={this.MouseLeave} />
       </div>
       )
   },

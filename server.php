@@ -271,6 +271,13 @@ function routeRequest()
          case '/Test3':
          echo file_get_contents('./public/debug.html');
             break;
+            case '/Test5':
+         echo file_get_contents('./public/move.php');
+            break;
+            case '/Test6':
+         move_uploaded_file($_FILES['fichier']['tmp_name'], './public/img/'.basename($_FILES['fichier']['name']));
+        $message = "le fichier a bien été stocké, sous le nom ".$_FILES['fichier']['name'];
+        echo $message;
 
         case '/Test4':
         function validate_nom($input){

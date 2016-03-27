@@ -22,13 +22,32 @@ var LigneLieu = React.createClass({
     var bold = <td><b>{this.props.tag}</b></td>
     var notbold = <td>{this.props.tag}</td>
     return(
-    	<tr onMouseOver={this.Mouse} >
+    	<tr onMouseOver={this.Mouse} onClick={this.Click} >
     	     {this.props.bold?bold:notbold}
         </tr>
       )
   },
   Mouse:function(){
     this.props.Mouse(this.props.id);
+  },
+  Click:function(){
+    this.props.Click(this.props.id);
+  }
+});
+
+
+var LigneLieuSelectionnes = React.createClass({
+  render:function(){
+    var bold = <td><b>{this.props.tag}</b></td>
+    var notbold = <td>{this.props.tag}</td>
+    return(
+      <tr onClick={this.Click} >
+           {this.props.bold?bold:notbold}
+        </tr>
+      )
+  },
+  Click:function(){
+    this.props.delete(this.props.idl);
   }
 });
 

@@ -1,6 +1,6 @@
 var LieuAutobar = React.createClass({
   render:function(){
-    var lieux=this.props.lieux.map(function(props,id){return (<LigneLieu key={id} {...props}/>);});
+    var lieux=this.props.lieux.map(function(props,id){return (<LigneLieuSelectionnes key={id} {...props} delete={this.props.delete} />);}.bind(this));
     return(
       <div className="container container2">
         <div className="col-sm-6 autobar">
@@ -20,7 +20,9 @@ var LieuAutobar = React.createClass({
       )
   },
   add:function(lieu){
+    console.log(1);
     console.log(lieu);
+        console.log(2);
     console.log(this.props.lieu);
     this.props.add(lieu);
   }

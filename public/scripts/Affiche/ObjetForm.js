@@ -19,7 +19,7 @@ var ObjetForm = React.createClass({
 			  	votre lieux n'apparait pas, s'il vous plait, référencez le d'abord dans la BDD dans l'onglet correspondant</p>
 			  	<p>Utilisez les flèches du clavier pour séléctionner le lieu et appuyez sur TAB pour l'ajouter à la ligne</p>
 			  </div>
-			  <LieuAutobar data={this.props.data} lieux={this.state.lieux} add={this.add} />
+			  <LieuAutobar data={this.props.data} lieux={this.state.lieux} add={this.add} delete={this.delete}/>
 			  <hr />
 			  <div>
 			    <input value="Enregistrer" className="special small" type="submit" />   
@@ -39,7 +39,12 @@ var ObjetForm = React.createClass({
 		        </section>
 	},
 	add:function(lieu){
-		this.setState({lieux:this.state.lieux.concat(lieu)});//la il faut changer !!
+		if(!this.state.lieux.find(function(props){return props.idl === lieu.idl}.bind(this)))
+			this.setState({lieux:this.state.lieux.concat(lieu)});//la il faut changer !!
+	},
+	delete:function(idl){
+		console.log(this.state.lieux);
+		this.setState({lieux:this.state.lieux.filter( function(props){return(props.idl!==idl)}.bind(this) )});
 	},	
 	handleChange:function(event){
 		switch(event.target.id){
@@ -63,10 +68,28 @@ var ObjetForm = React.createClass({
 				if(data.error){
 					this.setState({nomErr: data.error.nom,descriptionErr: data.error.description});
 				}else{
-					this.setState({nom:'', description:'',nomErr:'Bien Soumis',descriptionErr:'Bien Soumis'});
+        			ReactDOM.render( <SuccessForm user={this.props.user} />, document.getElementById('content2') );
 				}
     		}.bind(this),
 		});
 	},
 });
 
+
+var SuccessForm = React.createClass({
+	render:function(){
+		var form = 
+		<section id="three" className="wrapper style3 validform">
+        <div className="container">
+          <header className="major">
+            <h2 >BIEN ENREGISTRÉ !</h2>
+            <p> Votre déclaration a bien été prise en compte {this.props.user.prenom} {this.props.user.nom} !</p>
+            <i className="fa fa-check fa-5x"></i>
+            <br/>
+            <p> Allez voir dans la liste des objets !</p>
+          </header>
+        </div>
+      </section>
+		return form;
+	}
+});
