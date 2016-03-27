@@ -67,7 +67,7 @@ var Inscription = React.createClass({
 					this.setState({nomErr: data.error.nom,prenomErr: data.error.prenom,identifiantErr: data.error.identifiant,motdepasseErr: data.error.motdepasse});
 				}else{
 					this.setState({nomErr:'',prenomErr:'',identifiantErr:'',motdepasseErr:''});
-					ReactDOM.render(<App2 active="Connexion" user={data.result} />,document.getElementById('content1'));
+					ReactDOM.render(<App active="Connexion" user={data.result} />,document.getElementById('content1'));
 					ReactDOM.render(<InscriptionValide user={data.result} />,document.getElementById('content2'));	
 				}
     		}.bind(this),

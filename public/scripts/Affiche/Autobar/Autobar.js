@@ -2,7 +2,7 @@ var SousListeAutocomplete = React.createClass({
   render:function(){
     var lieux = this.props.isOpen && this.props.data.map(function(props,id) {
       return (
-        <LigneLieu key={id} {...props} bold={this.props.highlightedIndex==id?true:false} /> 
+        <LigneLieu key={id} id={id} {...props} bold={this.props.highlightedIndex==id?true:false} Mouse={this.props.Mouse} /> 
         )
     }.bind(this));
     return(
@@ -113,6 +113,9 @@ var Autobar = React.createClass({
   tri:function(a,b){
     return a.tag.localeCompare(b.tag);
   },
+  Mouse:function(id){
+    this.setState({highlightedIndex: id});
+  },
   render: function(){
     return(
       <div>
@@ -123,7 +126,7 @@ var Autobar = React.createClass({
       type="text" 
       onChange={this.handleChange}
       onKeyDown={this.handleKeyDown} />
-      <SousListeAutocomplete data={this.state.datalist} highlightedIndex={this.state.highlightedIndex} isOpen={this.state.isOpen} />
+      <SousListeAutocomplete data={this.state.datalist} highlightedIndex={this.state.highlightedIndex} isOpen={this.state.isOpen} Mouse={this.Mouse} />
       </div>
       )
   },

@@ -62,15 +62,23 @@ function routeRequest()
 {
     //'HTTP_REFERER'
     //Changement de mot de passe stocker l'heure en SESSION er en hidden verifiez que le delta ne depasse pas une certaine limite
-    //https://www.owasp.org
+    //https://www.owasp.org 
+
+
+   
+
+
     $uri = substr($_SERVER['REQUEST_URI'],6);
     $dbh = Database::connect();
-
+/*
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
     // last request was more than 30 minutes ago
-    session_unset();     // unset $_SESSION variable for the run-time 
-    session_destroy();   // destroy session data in storage
-    }
+        session_unset();     // unset $_SESSION variable for the run-time 
+        session_destroy();
+           // destroy session data in storage
+    }*/
+
+
     $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
 
@@ -93,12 +101,13 @@ function routeRequest()
             file_get_contents('./public/scripts/Affiche/NavbarObjet.js').
             file_get_contents('./public/scripts/Filter/FilterBar.js').
             file_get_contents('./public/scripts/Affiche/ListeAffiche.js').
+            file_get_contents('./public/scripts/Docs/Docs.js').
             file_get_contents('./public/scripts/Lieu/Lieu.js').
             file_get_contents('./public/scripts/Lieu/NavbarLieu.js').
             file_get_contents('./public/scripts/Lieu/LieuForm.js').
             file_get_contents('./public/scripts/Lieu/ListeLieu.js').
             file_get_contents('./public/scripts/Lieu/LieuMap.js').
-            file_get_contents('./public/scripts/App/App2.js').
+            file_get_contents('./public/scripts/App/App.js').
             '</script>';
             break;       
         case '/Connexion':
@@ -107,7 +116,7 @@ function routeRequest()
                 echo '<script type="text/babel">'.
                 file_get_contents('./public/scripts/Utilisateur/Utilisateur.js').
                 file_get_contents('./public/scripts/Connexion-Inscription/Connexion.js').
-                file_get_contents('./public/scripts/App/App.js').
+                file_get_contents('./public/scripts/App/App2.js').
                 file_get_contents('./public/scripts/App/Connexion.js').
                 '</script>';
             } else if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -262,6 +271,7 @@ function routeRequest()
          case '/Test3':
          echo file_get_contents('./public/debug.html');
             break;
+
         case '/Test4':
         function validate_nom($input){
             if(strlen($input)>4)

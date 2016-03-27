@@ -19,7 +19,7 @@ class Lieu{
         }
     }
 
-     public function supprimerUnLieu($dbh,$idl){
+     public static function supprimerUnLieu($dbh,$idl){
         $query = "DELETE FROM Lieu WHERE idl=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($idl));

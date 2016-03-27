@@ -22,10 +22,13 @@ var LigneLieu = React.createClass({
     var bold = <td><b>{this.props.tag}</b></td>
     var notbold = <td>{this.props.tag}</td>
     return(
-    	<tr>
+    	<tr onMouseOver={this.Mouse} >
     	     {this.props.bold?bold:notbold}
         </tr>
       )
+  },
+  Mouse:function(){
+    this.props.Mouse(this.props.id);
   }
 });
 

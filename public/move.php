@@ -28,7 +28,7 @@ session_start();
         <div class="container">
             <ul class="nav navbar-nav" >
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
-                <li><?php include("./View/Menu/LogInOut.php"); ?></li>
+               
                 <li><a href="#accueil" ><button type="button" class="btn btn-primary">Recherche avancée</button></a></li>
                 <li><a href="#info"><button type="button" class="btn btn-primary">Statistiques</button></a></li>
                 <li><a href="#contact"><button type="button" class="btn btn-primary">Contact</button></a></li>
@@ -60,17 +60,16 @@ session_start();
             </div>
         </form>
         <br>
+
         
-        <?php include("./View/Menu/Logo.php"); ?>
-        <br>
-        <?php include("./View/Menu/Tables.php"); ?>
-        
-        <form action="./PagePhp/uploadimage.php" method="post" enctype="multipart/form-data">
+        <form action="/MODAL/Test6" method="post" enctype="multipart/form-data">
             <input type="file" name="fichier"/>
             <br>
             <input type="submit" value="soumettre la photo" />
         </form>
-        
+
+       
     </body>
 </html>
+
 

@@ -25,10 +25,6 @@ class Objet{
         return $reponse;
     }
 
-    public static function verifierUnObjet($nom,$description){
-        if($nom.length<3)
-            throw new Exception("Nom");
-    }
 }
 
 ?>

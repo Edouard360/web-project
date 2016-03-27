@@ -5,7 +5,7 @@ use ProjetModal
 
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE Utilisateur(idu SMALLINT AUTO_INCREMENT, nom CHAR(15), prenom CHAR(15), 
-	identifiant CHAR(15) UNIQUE, mdp CHAR(15), admin BOOLEAN,
+	identifiant CHAR(15) UNIQUE, mdp CHAR(50), admin BOOLEAN,
 	CONSTRAINT pk_Personne PRIMARY KEY (idu));
 
 DELETE FROM Utilisateur;
@@ -31,7 +31,7 @@ SELECT * FROM Objet;
 
 
 DROP TABLE IF EXISTS Lieu;
-CREATE TABLE Lieu(idl SMALLINT AUTO_INCREMENT, tag CHAR(25), lat DECIMAL(10,7), lng DECIMAL(10,7)
+CREATE TABLE Lieu(idl SMALLINT AUTO_INCREMENT, tag CHAR(25), lat DECIMAL(10,7), lng DECIMAL(10,7),
 	CONSTRAINT pk_Lieu PRIMARY KEY (idl));
 
 DELETE FROM Lieu;

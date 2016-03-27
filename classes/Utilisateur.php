@@ -136,6 +136,8 @@ class Utilisateur implements JsonSerializable{
         foreach($lieux as $idl){
             $sth->execute(array($ido,$idl));
         }
+
+        move_uploaded_file($_FILES['fichier']['tmp_name'], '../../public/img/'.basename($_FILES['fichier']['name']));
     }
 
     public function declarerAvoirTrouveUnObjet($dbh,$ido){
