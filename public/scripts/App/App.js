@@ -134,8 +134,8 @@ var App = React.createClass({
 
 
 
-$.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyCL0D13h3FIvrnrRFRvuC4rj_GY8eOl9eQ").done(creater);
-function creater(){
+$.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyCL0D13h3FIvrnrRFRvuC4rj_GY8eOl9eQ").done(init);
+function init(){
 ReactDOM.render(
   <App active="Home"/>,
   document.getElementById('content1')

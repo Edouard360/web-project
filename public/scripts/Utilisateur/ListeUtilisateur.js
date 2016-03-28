@@ -41,7 +41,6 @@ var ListeUtilisateur = React.createClass({
       }.bind(this)
     });
   },
-
   handleDetruire: function(idu){
     $.ajax({
       url: "./DetruireUtilisateur",

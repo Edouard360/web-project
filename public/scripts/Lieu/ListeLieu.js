@@ -45,12 +45,3 @@ var ListeLieu = React.createClass({
 		)
 	}
 });
-
-/*
-ReactDOM.render(
-  <ListeLieu />,
-  document.getElementById('content2')
-);
-*/
-
-

@@ -20,10 +20,7 @@ var LieuAutobar = React.createClass({
       )
   },
   add:function(lieu){
-    console.log(1);
     console.log(lieu);
-        console.log(2);
-    console.log(this.props.lieu);
     this.props.add(lieu);
   }
 });

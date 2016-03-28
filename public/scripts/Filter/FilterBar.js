@@ -1,9 +1,4 @@
 var FilterBar = React.createClass({
-  getInitialState: function () {
-    return {
-      value:this.props.value
-    }
-  },
   handleChange:function (event) {
     this.props.handleChange(event.target.value);
   },

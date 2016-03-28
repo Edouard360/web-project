@@ -4,7 +4,7 @@ var ObjetForm = React.createClass({
 	},
 	render:function(){
 		var form = 
-			<form onSubmit={this.soumettreObjet}>
+			<form onSubmit={this.soumettreObjet} encType="multipart/form-data" >
 			  <div className="form-group">
 			  	<label >Nom</label>
 			    <input className="form-control" type="text" id="nom" placeholder="Nom" value={this.state.nom} onChange={this.handleChange} />{this.state.nomErr}
@@ -13,11 +13,16 @@ var ObjetForm = React.createClass({
 			  	<label >Description</label>
 			    <input className="form-control" type="text" id="description" placeholder="Description" value={this.state.description} onChange={this.handleChange} />{this.state.descriptionErr}
 			  </div>
+			  <div className="form-group">
+			  	<label >Image</label>
+			  	<span className="file-input btn btn-block btn-primary btn-file">
+                Télécharger une image&hellip; <input type="file" className="form-control" type="file" name="image" id="image" />
+            	</span>
+			  </div>
 			  <div className="text-form">
 			  	<p><i className="fa fa-exclamation-triangle"></i>&nbsp; Si vous pensez savoir où a été perdu votre objet, 
 			  	vous pouvez préciser autant de lieux que vous le souhaitez, tant qu'ils apparaissent dans la barre d'autocomplétion ! Si
 			  	votre lieux n'apparait pas, s'il vous plait, référencez le d'abord dans la BDD dans l'onglet correspondant</p>
-			  	<p>Utilisez les flèches du clavier pour séléctionner le lieu et appuyez sur TAB pour l'ajouter à la ligne</p>
 			  </div>
 			  <LieuAutobar data={this.props.data} lieux={this.state.lieux} add={this.add} delete={this.delete}/>
 			  <hr />
@@ -59,12 +64,23 @@ var ObjetForm = React.createClass({
 	},
 	soumettreObjet:function(e){
 		e.preventDefault();
+		var formData = new FormData();
+		var file = document.getElementById('image').files[0];
+		if(file)
+			formData.append('image', file, file.name);
+		formData.append('nom', this.state.nom);
+		formData.append('description', this.state.description);
+		formData.append('lieux', JSON.stringify(this.state.lieux.map(function(props){return props.idl;})));
 		$.ajax({
 			url: "./AjouterUnObjet",
 			type: "post",
 			dataType: "json",
-			data: {nom: this.state.nom, description: this.state.description, lieux:this.state.lieux.map(function(props){return props.idl;})},
+			contentType: false,
+			processData: false,
+			cache: false,
+			data: formData,
 			success: function(data) {
+				console.log(data);
 				if(data.error){
 					this.setState({nomErr: data.error.nom,descriptionErr: data.error.description});
 				}else{

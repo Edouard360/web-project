@@ -120,24 +120,25 @@ class Utilisateur implements JsonSerializable{
     }
 
     public function ajouterUnObjet($dbh,$nom,$description,$lieux){
-
         if(is_array($u=Helpers::verifierLesParametresObjet())){
             return(array("error"=>$u));
         }
         $query = "INSERT INTO Objet (lostBy,nom,description) VALUES (?,?,?)";
         $sth = $dbh->prepare($query);
-        $sth->execute(array($this->idu,$nom,$description));
+        $sth->execute(array($this->idu,$_POST["nom"],$description));
+        $ido = $dbh->lastInsertId();
+        if (is_array($_FILES["image"]) && $_FILES["image"]['type']=='image/jpeg'){        
+            move_uploaded_file($_FILES['image']['tmp_name'], './public/img/'.$ido.'.jpeg');
+        }
         if($lieux==null){
             return;
-        }
-        $ido = $dbh->lastInsertId();
+        }     
         $query = "INSERT INTO Enregistrementobjetlieu (ido,idl) VALUES (?,?)";
         $sth = $dbh->prepare($query);
         foreach($lieux as $idl){
             $sth->execute(array($ido,$idl));
         }
-
-        move_uploaded_file($_FILES['fichier']['tmp_name'], '../../public/img/'.basename($_FILES['fichier']['name']));
+        
     }
 
     public function declarerAvoirTrouveUnObjet($dbh,$ido){

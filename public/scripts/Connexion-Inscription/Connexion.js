@@ -82,8 +82,6 @@ var Connexion = React.createClass({
 		              		<div className="col-sm-12 inscription">
 		                  		{this.state.connected?deconnexion:connexion}
 		              		</div>
-		           
-
 		              		{(formbool)?form1:""}
 		              		{(formbool)?form2:""}
 		              		{(formbool)?submit:""}

@@ -26,7 +26,7 @@ var Affiche = React.createClass({
                   </div>
     var lieux;
     if(this.props.lieux){
-      lieux=this.props.lieux.map(function(props,id){return (<LigneLieu key={id} tag={props}/>);});
+      lieux=this.props.lieux.map(function(props,id){return (<div key={id} >{props} <br/></div>);});
     }
     var style1=<div className="container affiche">
                   L'OBJET
@@ -36,12 +36,7 @@ var Affiche = React.createClass({
                   <Utilisateur {...this.props.lostBy} />
 
                   {this.props.lieux?"Probablement dans ces lieux":""}
-                  <table className="table">
-                    <thead></thead>
-                    <tbody>
-                      {lieux}
-                    </tbody>
-                  </table>
+                  {lieux}
                   {this.props.foundBy.nom?retrouve:""}
                   <div>    
                       {((this.props.user.nom!=undefined) &(this.props.user.idu===this.props.lostBy.idu||parseInt(this.props.user.admin)!==0)) ? supprimer:""}
@@ -52,11 +47,14 @@ var Affiche = React.createClass({
     var supprimer2 = <button className="button twice" onClick={this.handleDelete}> <i className="fa fa-trash-o"></i>&nbsp; Supprimer</button>
     var undeclare2 = <button className="button twice" onClick={this.handleUndeclare}><i className="fa fa-unlock"></i>&nbsp; Retirer</button>
     var declarer2 = <button className="button twice" onClick={this.handleDeclare}><i className="fa fa-tag"></i>&nbsp; Déclarer</button>            
-    var retrouve2 = <ul>Retrouvé par:<li>{this.props.foundBy.prenom} {this.props.foundBy.nom}</li></ul>     
-    var style2 = <div className="square">
+    var retrouve2 = <ul>Retrouvé par:<li>{this.props.foundBy.prenom} {this.props.foundBy.nom}</li></ul>
+    var backgroundStyle ={backgroundImage: 'url(./public/img/'+this.props.objet.ido+'.jpeg)'}    
+    var style2 = <div className="square bg" style={backgroundStyle} >
                     <div className="content">
                         <div className="table">
+                     
                             <div className="table-cell top">
+
                             <ul>Objet:<li>{this.props.objet.nom}</li></ul>
                             <hr/>
                             <ul>Perdu par:<li>{this.props.lostBy.prenom} {this.props.lostBy.nom}</li></ul>
@@ -74,11 +72,10 @@ var Affiche = React.createClass({
                         </div>
                     </div>
                 </div>            
-    
     return(
       <div>
         {this.props.mode?style2:style1}
-        </div>
+      </div>
       );
   },
   handleDelete: function(){

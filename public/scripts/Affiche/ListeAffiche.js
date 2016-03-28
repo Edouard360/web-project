@@ -1,4 +1,4 @@
-var ListeAffiche = React.createClass({
+ var ListeAffiche = React.createClass({
   getInitialState: function() {
     return {objets: [], value:"",mode:true};
   },

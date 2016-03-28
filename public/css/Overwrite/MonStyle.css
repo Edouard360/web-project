@@ -91,7 +91,7 @@ form.navbar-form.navbar-left.navbar-fixed-top.special-fix {
 form.navbar-form.navbar-left.navbar-fixed-top.special-fix > ul {}
 
 
-.wrapper.style1.special.Affiche{padding-left: 25%;padding-right: 5%;}
+.wrapper.style1.special.Affiche{padding-left: 20%;padding-right: 5%;}
 
 
 .wrapper.style1.special.Lieu{padding-left: 25%;padding-right: 5%;}
@@ -105,4 +105,23 @@ form.navbar-form.navbar-left.navbar-fixed-top.special-fix > ul {}
 	font-size: 12px;
 	line-height: 1.9;
 	text-align: left;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
 }

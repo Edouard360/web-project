@@ -70,13 +70,13 @@ function routeRequest()
 
     $uri = substr($_SERVER['REQUEST_URI'],6);
     $dbh = Database::connect();
-/*
+
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
     // last request was more than 30 minutes ago
         session_unset();     // unset $_SESSION variable for the run-time 
         session_destroy();
            // destroy session data in storage
-    }*/
+    }
 
 
     $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
@@ -167,7 +167,7 @@ function routeRequest()
                 if(is_null($u)){
                     header('Location: /Connexion');
                 }else{                    
-                    $u = $u->ajouterUnObjet($dbh, $_POST["nom"],$_POST["description"],$_POST["lieux"]);
+                    $u = $u->ajouterUnObjet($dbh, $_POST["nom"],$_POST["description"],json_decode($_POST["lieux"]));
                     if(is_array($u) && isset($u["error"])){
                         echo json_encode($u);
                     }
@@ -278,6 +278,11 @@ function routeRequest()
          move_uploaded_file($_FILES['fichier']['tmp_name'], './public/img/'.basename($_FILES['fichier']['name']));
         $message = "le fichier a bien été stocké, sous le nom ".$_FILES['fichier']['name'];
         echo $message;
+        echo "<img src='./public/img/'".basename($_FILES['fichier']['name'])."/>";
+        break;
+            case '/Test7':   
+        echo "<img src='./public/img/FullSizeRender.jpg' width='500' height='500' />";
+        break;
 
         case '/Test4':
         function validate_nom($input){
