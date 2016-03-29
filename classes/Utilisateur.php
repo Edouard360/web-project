@@ -92,7 +92,7 @@ class Utilisateur implements JsonSerializable{
     }
 
     public function rendreAdmin($dbh,$idu){
-        if(!$this->admin){ return "error";}
+        if($this->admin != 1){ return "error";}
         $query = "UPDATE Utilisateur SET admin=1 WHERE idu=?";
         $sth = $dbh->prepare($query);
         $sth->execute(array($idu));

@@ -2,7 +2,6 @@
 session_name("ProjetModal2016HugoetEdouard");
 session_start();
 
-
 require("./classes/Database.php");
 require("./classes/Helpers/Helpers.php");
 require("./classes/Objet.php");
@@ -14,8 +13,7 @@ require("./classes/Message.php");
 //Protegez l'authentification sur le site avec HTTPS (crypte les communications)
 //echo (htmlspecialchars(...) sinon faille de securite )
 
-//Pour invoquer le script depuis la console
-
+//Pour invoquer le script depuis la console sur le port 3000
 $scriptInvokedFromCli =
     isset($_SERVER['argv'][0]) && $_SERVER['argv'][0] === 'server.php';
 
@@ -38,20 +36,14 @@ function routeRequest()
     // last request was more than 30 minutes ago
         session_unset();     // unset $_SESSION variable for the run-time 
         session_destroy();
-           // destroy session data in storage
+    // destroy session data in storage
     }
 
 
     $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
-
-
-    $uri = substr($_SERVER['REQUEST_URI'],6);
     $dbh = Database::connect();
     $u=Utilisateur::getUtilisateur($dbh, $_SESSION["id"]);
-
-
-    
-
+    $uri = substr( $_SERVER['REQUEST_URI'], strrpos( $_SERVER['REQUEST_URI'], '/'));
 
     switch($uri){
         case '/':
@@ -171,10 +163,12 @@ function routeRequest()
             }
             break; 
         case '/ChargerLesUtilisateurs':
-            if($_SERVER['REQUEST_METHOD'] === 'GET') {
-                header('Content-Type: application/json');
-                $reponse = Utilisateur::chargerLesUtilisateurs($dbh);
-                echo json_encode($reponse);
+            if(!is_null($u)){
+                if($_SERVER['REQUEST_METHOD'] === 'GET') {
+                    header('Content-Type: application/json');
+                    $reponse = Utilisateur::chargerLesUtilisateurs($dbh);
+                    echo json_encode($reponse);
+                }
             }
             break;
         case '/DetruireUtilisateur':
@@ -203,58 +197,8 @@ function routeRequest()
                 }   
             }
             break; 
-         case '/Test3':
-         echo file_get_contents('./public/debug.html');
-            break;
-            case '/Test5':
-         echo file_get_contents('./public/move.php');
-            break;
-            case '/Test6':
-         move_uploaded_file($_FILES['fichier']['tmp_name'], './public/img/'.basename($_FILES['fichier']['name']));
-        $message = "le fichier a bien été stocké, sous le nom ".$_FILES['fichier']['name'];
-        echo $message;
-        echo "<img src='./public/img/'".basename($_FILES['fichier']['name'])."/>";
-        break;
-            case '/Test7':   
-        echo "<img src='./public/img/FullSizeRender.jpg' width='500' height='500' />";
-        break;
-
-        case '/Test4':
-        function validate_nom($input){
-            if(strlen($input)>4)
-                return "OK";
-            else return null;
-        }
-        function validate_description($input){
-            if(strlen($input)>3)
-                return "Nom trop court";
-            else if (strlen($input)>10)
-                return "Nom trop long";
-            else 
-                return null;
-        }
-        $options = array(
-            'nom' => array(
-                    'filter' => FILTER_CALLBACK, 
-                    'options' => 'validate_nom'
-            ),
-            'description' => array(
-                    'filter' => FILTER_CALLBACK, //Valider l'entier.
-                    'options' => 'validate_description'
-            )
-        );
-        $resultat = filter_input_array(INPUT_POST, $options);
-
-          
-         echo print_r($resultat);
-         echo $resultat==null;
-            break;
         default:
+            echo file_get_contents('./public/redirect.html');
             return false;
     }
-
-
-
-
-
 }

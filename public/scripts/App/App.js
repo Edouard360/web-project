@@ -109,6 +109,7 @@ var App = React.createClass({
           </ul>
       </li>
     var connexion=<li role="presentation" onClick={this.avoidReload} className={this.state.Connexion} id="Connexion" ><a href="#" id="Connexion"  > Connexion</a></li>;
+    var users= <li role="presentation" onClick={this.avoidReload} className={this.state.Users}><a href="#" id="Users" ><i className="fa fa-users" id="Users"></i>&nbsp;</a></li>
     return(
       <div>
         <nav className="navbar navbar-default navbar-fixed-top ">
@@ -119,7 +120,7 @@ var App = React.createClass({
             <ul className="nav navbar-nav">
               <li role="presentation" onClick={this.avoidReload} className={this.state.Home}><a href="#" id="Home"  ><i className="fa fa-key" id="Home" ></i>&nbsp;</a></li>
               <li role="presentation" onClick={this.avoidReload} className={this.state.Lieux}><a href="#" id="Lieux" ><i className="fa fa-university" id="Lieux"></i>&nbsp;</a></li>
-              <li role="presentation" onClick={this.avoidReload} className={this.state.Users}><a href="#" id="Users" ><i className="fa fa-users" id="Users"></i>&nbsp;</a></li>
+              {this.state.user.nom?users:""}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li role="presentation" onClick={this.avoidReload} className={this.state.Docs} id="Docs" ><a href="#" id="Docs"><i className="fa fa-book" id="Docs"></i>&nbsp; </a></li>
