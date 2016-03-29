@@ -125,3 +125,6 @@ form.navbar-form.navbar-left.navbar-fixed-top.special-fix > ul {}
   cursor: inherit;
   display: block;
 }
+.container .doc{
+	padding-top: 300px;
+}

@@ -654,3 +654,10 @@
   position: relative;
   border-color: #4078c0;
 }
+.container {}
+
+.container.doc {
+    padding-top: 100px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
