@@ -47,7 +47,7 @@ var Affiche = React.createClass({
     var supprimer2 = <button className="button twice" onClick={this.handleDelete}> <i className="fa fa-trash-o"></i>&nbsp; Supprimer</button>
     var undeclare2 = <button className="button twice" onClick={this.handleUndeclare}><i className="fa fa-unlock"></i>&nbsp; Retirer</button>
     var declarer2 = <button className="button twice" onClick={this.handleDeclare}><i className="fa fa-tag"></i>&nbsp; Déclarer</button>            
-    var retrouve2 = <ul>Retrouvé par:<li>{this.props.foundBy.prenom} {this.props.foundBy.nom}</li></ul>
+    var retrouve2 = <ul>Retrouvé par:<li>{this.props.foundBy.prenom} </li></ul>
     var backgroundStyle ={backgroundImage: 'url(./public/img/'+this.props.objet.ido+'.jpeg)'}    
     var style2 = <div className="square bg" style={backgroundStyle} >
                     <div className="content">
@@ -57,7 +57,7 @@ var Affiche = React.createClass({
 
                             <ul>Objet:<li>{this.props.objet.nom}</li></ul>
                             <hr/>
-                            <ul>Perdu par:<li>{this.props.lostBy.prenom} {this.props.lostBy.nom}</li></ul>
+                            <ul>Perdu par:<li>{this.props.lostBy.prenom} </li></ul>
                             <ul>{this.props.objet.day}   à   {this.props.objet.hour}</ul>
                             {this.props.lieux?<ul>Peut-être dans ces lieux</ul>:""}
                             {this.props.lieux?<ul>{this.props.lieux.map(function(props){return props.toUpperCase()+' '})}</ul> :""}

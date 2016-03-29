@@ -3,7 +3,8 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-            <name>MODAL</name>
+            <name>Objet Perdu</name>
+            <!-- Pour changer le nom avec lequel le projet est affiché -->
         </data>
     </configuration>
 </project>

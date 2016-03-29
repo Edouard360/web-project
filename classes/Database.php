@@ -15,6 +15,7 @@ class Database{
         return $dbh;
     }
 }
+
 /*
 class Database{
     public static function connect() {
